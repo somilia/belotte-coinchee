@@ -1,0 +1,3 @@
+C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir
+C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/rebuild_cache.dir

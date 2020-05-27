@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libProjectIFB.a  CMakeFiles/ProjectIFB.dir/library.c.obj
+C:\MinGW\bin\ranlib.exe libProjectIFB.a
