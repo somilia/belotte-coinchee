@@ -4,7 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/soso_/Documents/GitHub/ProjectIFB/library.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/library.c.obj"
+  "C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/carte.c.obj"
+  "C:/Users/soso_/Documents/GitHub/ProjectIFB/contrat.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/contrat.c.obj"
+  "C:/Users/soso_/Documents/GitHub/ProjectIFB/equipe.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/equipe.c.obj"
+  "C:/Users/soso_/Documents/GitHub/ProjectIFB/joueur.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/joueur.c.obj"
+  "C:/Users/soso_/Documents/GitHub/ProjectIFB/main.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/main.c.obj"
+  "C:/Users/soso_/Documents/GitHub/ProjectIFB/menuenchere.c" "C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/CMakeFiles/ProjectIFB.dir/menuenchere.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

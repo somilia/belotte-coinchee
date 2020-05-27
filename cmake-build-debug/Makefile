@@ -122,32 +122,167 @@ ProjectIFB/fast:
 	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/build
 .PHONY : ProjectIFB/fast
 
-library.obj: library.c.obj
+carte.obj: carte.c.obj
 
-.PHONY : library.obj
+.PHONY : carte.obj
 
 # target to build an object file
-library.c.obj:
-	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/library.c.obj
-.PHONY : library.c.obj
+carte.c.obj:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/carte.c.obj
+.PHONY : carte.c.obj
 
-library.i: library.c.i
+carte.i: carte.c.i
 
-.PHONY : library.i
+.PHONY : carte.i
 
 # target to preprocess a source file
-library.c.i:
-	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/library.c.i
-.PHONY : library.c.i
+carte.c.i:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/carte.c.i
+.PHONY : carte.c.i
 
-library.s: library.c.s
+carte.s: carte.c.s
 
-.PHONY : library.s
+.PHONY : carte.s
 
 # target to generate assembly for a file
-library.c.s:
-	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/library.c.s
-.PHONY : library.c.s
+carte.c.s:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/carte.c.s
+.PHONY : carte.c.s
+
+contrat.obj: contrat.c.obj
+
+.PHONY : contrat.obj
+
+# target to build an object file
+contrat.c.obj:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/contrat.c.obj
+.PHONY : contrat.c.obj
+
+contrat.i: contrat.c.i
+
+.PHONY : contrat.i
+
+# target to preprocess a source file
+contrat.c.i:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/contrat.c.i
+.PHONY : contrat.c.i
+
+contrat.s: contrat.c.s
+
+.PHONY : contrat.s
+
+# target to generate assembly for a file
+contrat.c.s:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/contrat.c.s
+.PHONY : contrat.c.s
+
+equipe.obj: equipe.c.obj
+
+.PHONY : equipe.obj
+
+# target to build an object file
+equipe.c.obj:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/equipe.c.obj
+.PHONY : equipe.c.obj
+
+equipe.i: equipe.c.i
+
+.PHONY : equipe.i
+
+# target to preprocess a source file
+equipe.c.i:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/equipe.c.i
+.PHONY : equipe.c.i
+
+equipe.s: equipe.c.s
+
+.PHONY : equipe.s
+
+# target to generate assembly for a file
+equipe.c.s:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/equipe.c.s
+.PHONY : equipe.c.s
+
+joueur.obj: joueur.c.obj
+
+.PHONY : joueur.obj
+
+# target to build an object file
+joueur.c.obj:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/joueur.c.obj
+.PHONY : joueur.c.obj
+
+joueur.i: joueur.c.i
+
+.PHONY : joueur.i
+
+# target to preprocess a source file
+joueur.c.i:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/joueur.c.i
+.PHONY : joueur.c.i
+
+joueur.s: joueur.c.s
+
+.PHONY : joueur.s
+
+# target to generate assembly for a file
+joueur.c.s:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/joueur.c.s
+.PHONY : joueur.c.s
+
+main.obj: main.c.obj
+
+.PHONY : main.obj
+
+# target to build an object file
+main.c.obj:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/main.c.obj
+.PHONY : main.c.obj
+
+main.i: main.c.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/main.c.s
+.PHONY : main.c.s
+
+menuenchere.obj: menuenchere.c.obj
+
+.PHONY : menuenchere.obj
+
+# target to build an object file
+menuenchere.c.obj:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/menuenchere.c.obj
+.PHONY : menuenchere.c.obj
+
+menuenchere.i: menuenchere.c.i
+
+.PHONY : menuenchere.i
+
+# target to preprocess a source file
+menuenchere.c.i:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/menuenchere.c.i
+.PHONY : menuenchere.c.i
+
+menuenchere.s: menuenchere.c.s
+
+.PHONY : menuenchere.s
+
+# target to generate assembly for a file
+menuenchere.c.s:
+	$(MAKE) -f CMakeFiles\ProjectIFB.dir\build.make CMakeFiles/ProjectIFB.dir/menuenchere.c.s
+.PHONY : menuenchere.c.s
 
 # Help Target
 help:
@@ -158,9 +293,24 @@ help:
 	@echo ... ProjectIFB
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... library.obj
-	@echo ... library.i
-	@echo ... library.s
+	@echo ... carte.obj
+	@echo ... carte.i
+	@echo ... carte.s
+	@echo ... contrat.obj
+	@echo ... contrat.i
+	@echo ... contrat.s
+	@echo ... equipe.obj
+	@echo ... equipe.i
+	@echo ... equipe.s
+	@echo ... joueur.obj
+	@echo ... joueur.i
+	@echo ... joueur.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
+	@echo ... menuenchere.obj
+	@echo ... menuenchere.i
+	@echo ... menuenchere.s
 .PHONY : help
 
 

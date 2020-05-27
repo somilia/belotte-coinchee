@@ -56,35 +56,111 @@ include CMakeFiles/ProjectIFB.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ProjectIFB.dir/flags.make
 
-CMakeFiles/ProjectIFB.dir/library.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
-CMakeFiles/ProjectIFB.dir/library.c.obj: ../library.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ProjectIFB.dir/library.c.obj"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\library.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\library.c
+CMakeFiles/ProjectIFB.dir/main.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
+CMakeFiles/ProjectIFB.dir/main.c.obj: ../main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ProjectIFB.dir/main.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\main.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\main.c
 
-CMakeFiles/ProjectIFB.dir/library.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/library.c.i"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\library.c > CMakeFiles\ProjectIFB.dir\library.c.i
+CMakeFiles/ProjectIFB.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/main.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\main.c > CMakeFiles\ProjectIFB.dir\main.c.i
 
-CMakeFiles/ProjectIFB.dir/library.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/library.c.s"
-	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\library.c -o CMakeFiles\ProjectIFB.dir\library.c.s
+CMakeFiles/ProjectIFB.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/main.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\main.c -o CMakeFiles\ProjectIFB.dir\main.c.s
+
+CMakeFiles/ProjectIFB.dir/joueur.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
+CMakeFiles/ProjectIFB.dir/joueur.c.obj: ../joueur.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/ProjectIFB.dir/joueur.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\joueur.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\joueur.c
+
+CMakeFiles/ProjectIFB.dir/joueur.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/joueur.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\joueur.c > CMakeFiles\ProjectIFB.dir\joueur.c.i
+
+CMakeFiles/ProjectIFB.dir/joueur.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/joueur.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\joueur.c -o CMakeFiles\ProjectIFB.dir\joueur.c.s
+
+CMakeFiles/ProjectIFB.dir/equipe.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
+CMakeFiles/ProjectIFB.dir/equipe.c.obj: ../equipe.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/ProjectIFB.dir/equipe.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\equipe.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\equipe.c
+
+CMakeFiles/ProjectIFB.dir/equipe.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/equipe.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\equipe.c > CMakeFiles\ProjectIFB.dir\equipe.c.i
+
+CMakeFiles/ProjectIFB.dir/equipe.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/equipe.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\equipe.c -o CMakeFiles\ProjectIFB.dir\equipe.c.s
+
+CMakeFiles/ProjectIFB.dir/contrat.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
+CMakeFiles/ProjectIFB.dir/contrat.c.obj: ../contrat.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/ProjectIFB.dir/contrat.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\contrat.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\contrat.c
+
+CMakeFiles/ProjectIFB.dir/contrat.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/contrat.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\contrat.c > CMakeFiles\ProjectIFB.dir\contrat.c.i
+
+CMakeFiles/ProjectIFB.dir/contrat.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/contrat.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\contrat.c -o CMakeFiles\ProjectIFB.dir\contrat.c.s
+
+CMakeFiles/ProjectIFB.dir/menuenchere.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
+CMakeFiles/ProjectIFB.dir/menuenchere.c.obj: ../menuenchere.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/ProjectIFB.dir/menuenchere.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\menuenchere.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\menuenchere.c
+
+CMakeFiles/ProjectIFB.dir/menuenchere.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/menuenchere.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\menuenchere.c > CMakeFiles\ProjectIFB.dir\menuenchere.c.i
+
+CMakeFiles/ProjectIFB.dir/menuenchere.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/menuenchere.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\menuenchere.c -o CMakeFiles\ProjectIFB.dir\menuenchere.c.s
+
+CMakeFiles/ProjectIFB.dir/carte.c.obj: CMakeFiles/ProjectIFB.dir/flags.make
+CMakeFiles/ProjectIFB.dir/carte.c.obj: ../carte.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/ProjectIFB.dir/carte.c.obj"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\ProjectIFB.dir\carte.c.obj   -c C:\Users\soso_\Documents\GitHub\ProjectIFB\carte.c
+
+CMakeFiles/ProjectIFB.dir/carte.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ProjectIFB.dir/carte.c.i"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\soso_\Documents\GitHub\ProjectIFB\carte.c > CMakeFiles\ProjectIFB.dir\carte.c.i
+
+CMakeFiles/ProjectIFB.dir/carte.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ProjectIFB.dir/carte.c.s"
+	C:\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\soso_\Documents\GitHub\ProjectIFB\carte.c -o CMakeFiles\ProjectIFB.dir\carte.c.s
 
 # Object files for target ProjectIFB
 ProjectIFB_OBJECTS = \
-"CMakeFiles/ProjectIFB.dir/library.c.obj"
+"CMakeFiles/ProjectIFB.dir/main.c.obj" \
+"CMakeFiles/ProjectIFB.dir/joueur.c.obj" \
+"CMakeFiles/ProjectIFB.dir/equipe.c.obj" \
+"CMakeFiles/ProjectIFB.dir/contrat.c.obj" \
+"CMakeFiles/ProjectIFB.dir/menuenchere.c.obj" \
+"CMakeFiles/ProjectIFB.dir/carte.c.obj"
 
 # External object files for target ProjectIFB
 ProjectIFB_EXTERNAL_OBJECTS =
 
-libProjectIFB.a: CMakeFiles/ProjectIFB.dir/library.c.obj
-libProjectIFB.a: CMakeFiles/ProjectIFB.dir/build.make
-libProjectIFB.a: CMakeFiles/ProjectIFB.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libProjectIFB.a"
-	$(CMAKE_COMMAND) -P CMakeFiles\ProjectIFB.dir\cmake_clean_target.cmake
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/main.c.obj
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/joueur.c.obj
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/equipe.c.obj
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/contrat.c.obj
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/menuenchere.c.obj
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/carte.c.obj
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/build.make
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/linklibs.rsp
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/objects1.rsp
+ProjectIFB.exe: CMakeFiles/ProjectIFB.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\soso_\Documents\GitHub\ProjectIFB\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable ProjectIFB.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\ProjectIFB.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/ProjectIFB.dir/build: libProjectIFB.a
+CMakeFiles/ProjectIFB.dir/build: ProjectIFB.exe
 
 .PHONY : CMakeFiles/ProjectIFB.dir/build
 
