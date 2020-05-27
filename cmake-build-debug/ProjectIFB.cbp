@@ -18,10 +18,10 @@
 				</MakeCommands>
 			</Target>
 			<Target title="ProjectIFB">
-				<Option output="C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/libProjectIFB.a" prefix_auto="0" extension_auto="0"/>
+				<Option output="C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/ProjectIFB.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug"/>
 				<Option object_output="./"/>
-				<Option type="2"/>
+				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
@@ -36,10 +36,10 @@
 				</MakeCommands>
 			</Target>
 			<Target title="ProjectIFB/fast">
-				<Option output="C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/libProjectIFB.a" prefix_auto="0" extension_auto="0"/>
+				<Option output="C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug/ProjectIFB.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/soso_/Documents/GitHub/ProjectIFB/cmake-build-debug"/>
 				<Option object_output="./"/>
-				<Option type="2"/>
+				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
 					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/9.2.0/include"/>
@@ -74,10 +74,37 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/library.c">
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.c">
 			<Option target="ProjectIFB"/>
 		</Unit>
-		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/library.h">
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.h">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/contrat.c">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/contrat.h">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/equipe.c">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/equipe.h">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/joueur.c">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/joueur.h">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/main.c">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/menuenchere.c">
+			<Option target="ProjectIFB"/>
+		</Unit>
+		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/menuenchere.h">
 			<Option target="ProjectIFB"/>
 		</Unit>
 		<Unit filename="C:/Users/soso_/Documents/GitHub/ProjectIFB/CMakeLists.txt">
