@@ -1,6 +1,3 @@
-//
-// Created by soso_ on 27-May-20.
-//
 
 #ifndef PROJECTIFB_CARTE_H
 #define PROJECTIFB_CARTE_H

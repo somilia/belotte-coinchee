@@ -1,6 +1,4 @@
-//
-// Created by soso_ on 19-May-20.
-//
+
 
 #ifndef PROJECTIFB_CONTRAT_H
 #define PROJECTIFB_CONTRAT_H

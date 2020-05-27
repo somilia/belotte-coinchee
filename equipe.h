@@ -1,6 +1,3 @@
-//
-// Created by soso_ on 04-May-20.
-//
 
 #ifndef PROJECTIFB_EQUIPE_H
 #define PROJECTIFB_EQUIPE_H
