@@ -44,12 +44,14 @@ int main() {
   //  scanf("Entrer le nom du joueur %s", &nom);
 
 
-    Carte jeu[8];
-    Carte jeuEst[8];
-    Carte jeuNord[8];
-    Carte jeuOuest[8];
+    Carte jeu[8]={0};
+    Carte jeuEst[8]={0};
+    Carte jeuNord[8]={0};
+    Carte jeuOuest[8]={0};
+
 
     distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest);
+
     for (int i = 0; i<8; ++i)
     {
         printf("\nJeu: carte %d\n",i);

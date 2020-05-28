@@ -75,19 +75,16 @@ void melange(Carte *paquet)
 
 void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[])
 {
-  //  int com=0;
-  //  int com1=0;
-  //  int com2=0;
-  //  int com3=0;
+
 
     for(int i=0;i<32;i=i+4)
     {
-        for (int com=0; com<8; com++)
+        for (int p=0; p<8; p++)
         {
-            jeu[com] = paquet[i];
-            jeu1[com] = paquet[i+1];
-            jeu2[com] = paquet[i+2];
-            jeu3[com] = paquet[i+3];
+            jeu[p] = paquet[i];
+            jeu1[p] = paquet[i+1];
+            jeu2[p] = paquet[i+2];
+            jeu3[p] = paquet[i+3];
         }
 
     }
