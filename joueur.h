@@ -12,17 +12,18 @@ struct Joueur {
     char name[20];
     int contrat;
     int numEquipe;
- //   struct Equipe *equipe;
+    struct Equipe *equipe;
     bool hasBelote;
     bool isCapot;
     bool choseAtout;
     bool bot;
-   // Carte jeu[7];
+    struct Carte *carte;
 };
 
 Joueur joueur[3];
 
-void creerJoueur(Joueur* joueur, bool bot, bool numEquipe, int numJoueur, char name[]/*, Carte *jeu[]*/);
+
+void creerJoueur(Joueur *joueur, bool bot, bool numEquipe, int numJoueur, char name[]/*, Carte carte[]*/);
 
 
 

@@ -54,6 +54,7 @@ struct Carte {
     Valeur valeur;
 };
 
+Carte carte;
 
 void creerPaquetCarte(Carte paquet[]);
 

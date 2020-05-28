@@ -21,7 +21,7 @@ void contrat(Joueur *joueur)
         if (joueur[i].bot == 0)
         {
             printf("ui");
-            JoueurEnchere(&joueur[0], contrat, couleur, Pcontrat, Pcouleur);
+          //  JoueurEnchere(&joueur[0], contrat, couleur, Pcontrat, Pcouleur);
         }
         else {
             //BotEnchere(&joueur[i]);

@@ -12,14 +12,12 @@
 
 
 int main() {
-
     srand(time(NULL));
-
 
     Carte paquet[32] = {0};
     creerPaquetCarte(paquet);
 /**
-    printf("\npaquet non melange\n");
+    printf("\n paquet non melange\n");
     for (int i = 0; i < 32; ++i)
     {
         printf("\n%d\n",i);
@@ -28,7 +26,7 @@ int main() {
 **/
    melange(paquet);
 /**
-    printf("\npaquet melange\n");
+    printf("\n paquet melange\n");
     for (int i = 0; i < 32; ++i)
     {
         printf("\n%d\n",i);
@@ -37,11 +35,10 @@ int main() {
 **/
 
 
-   // creerEquipe(&equipe, 0);
-   // creerEquipe(&equipe, 1);
+ //   creerEquipe(&equipe, 0);
+ //   creerEquipe(&equipe, 1);
 
-    char nom[20];
-  //  scanf("Entrer le nom du joueur %s", &nom);
+    char nom[20] ={'S','O', 'S', 'O'};     //  scanf("Entrer le nom du joueur %s", &nom);   //scanf("Entrer le nom du joueur %s", joueur[0].name);
 
 
     Carte jeu[8]={0};
@@ -49,27 +46,25 @@ int main() {
     Carte jeuNord[8]={0};
     Carte jeuOuest[8]={0};
 
-
     distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest);
 
-    for (int i = 0; i<8; ++i)
-    {
-        printf("\nJeu: carte %d\n",i);
-        afficherCarte(jeu[i]);
-    }
+    Carte *tabcarte[4]={jeu, jeuEst, jeuNord, jeuOuest};
 
     for (int i = 0; i<8; ++i)
     {
-        printf("\nJeu: carte %d\n",i);
-        afficherCarte(jeuEst[i]);
+        printf("\nJeu du joueur 1: carte %d\n",i);
+
+        afficherCarte(tabcarte[1][i]);
     }
 
-    //scanf("Entrer le nom du joueur %s", joueur[0].name);
 
-    creerJoueur(&joueur[0], 0, 0, 0, nom);
-    creerJoueur(&joueur[1], 1, 1, 1, "Est");
-    creerJoueur(&joueur[2], 1, 0, 2,"Nord");
-    creerJoueur(&joueur[3], 1, 1, 3, "Ouest");
+    creerJoueur(&joueur[0], 0, 0, 0, "nom"); //, tabcarte[0]);
+    creerJoueur(&joueur[1], 1, 1, 1, "Est"); //, tabcarte[1]);
+    creerJoueur(&joueur[2], 1, 0, 2,"Nord"); //, tabcarte[2]);
+    creerJoueur(&joueur[3], 1, 1, 3, "Ouest"); //, tabcarte[3]);  //    afficherCarte(*joueur[3].carte);
+
+    
+
 
 
 /**

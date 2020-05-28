@@ -9,14 +9,13 @@
 
 
 
-void creerJoueur(Joueur *joueur, bool bot, bool numEquipe, int numJoueur, char name[]/*, Carte *jeu[]*/) {
+void creerJoueur(Joueur *joueur, bool bot, bool numEquipe, int numJoueur, char name[]/*, Carte carte[]*/) {
     joueur->numJoueur=numJoueur;
     strcpy(joueur->name, name);
     joueur->contrat=0;
     joueur->numEquipe=numEquipe;
    // joueur->equipe->numEquipe=numEquipe;
-   // memccpy(joueur->jeu, jeu, sizeof(Carte));
-   // memccpy(joueur->carte->jeu, jeu, sizeof(Carte));
+  //  memccpy(joueur->carte, carte, 8, sizeof(Carte));
     joueur->hasBelote=0;
     joueur->isCapot=0;
     joueur->choseAtout=0;
