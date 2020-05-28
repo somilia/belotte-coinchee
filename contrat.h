@@ -4,7 +4,7 @@
 #include "joueur.h"
 #include "equipe.h"
 
-void contrat(Joueur *joueur);
+void contrat(Joueur *joueur, Carte tabcarte[]);
 
 void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat, int *Pcouleur);
 

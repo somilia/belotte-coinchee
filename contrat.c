@@ -4,7 +4,7 @@
 #include "menuenchere.h"
 
 
-void contrat(Joueur *joueur)
+void contrat(Joueur *joueur, Carte tabcarte[])
 {
     int contrat=0;
     int couleur=0;
@@ -16,18 +16,29 @@ void contrat(Joueur *joueur)
     joueur[2]=*(joueur+2);
     joueur[3]=*(joueur+3);
 
+    tabcarte[0]=*tabcarte;
+    tabcarte[1]=*(tabcarte+1);
+    tabcarte[2]=*(tabcarte+2);
+    tabcarte[3]=*(tabcarte+3);
+
     for (int i=0; i<=3; i++)
     {
-        if (joueur[i].bot == 0)
+
+      /**  if (joueur[i].bot == 0)
         {
-            printf("ui");
+            printf("\n ui");
           //  JoueurEnchere(&joueur[0], contrat, couleur, Pcontrat, Pcouleur);
         }
         else {
             //BotEnchere(&joueur[i]);
-            printf("nn");
+            printf("\n nn\n");
         }
-        printf("La proposition de contrat est de %d", *Pcontrat);
+       // printf("La proposition de contrat est de %d", *Pcontrat); **/
+
+        afficherCarte(tabcarte[1]);
+        printf("\n");
+        afficherCarte(tabcarte[2]);
+        printf("\n");
     }
 
 }

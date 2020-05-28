@@ -38,7 +38,7 @@ int main() {
  //   creerEquipe(&equipe, 0);
  //   creerEquipe(&equipe, 1);
 
-    char nom[20] ={'S','O', 'S', 'O'};     //  scanf("Entrer le nom du joueur %s", &nom);   //scanf("Entrer le nom du joueur %s", joueur[0].name);
+    char nom[20] ={'S','O', 'S', 'O'};     //  scanf("Entrer le nom du joueur %s", &nom);   //printf("Entrer le nom du joueur"); scanf("%s", &joueur[0].name);
 
 
     Carte jeu[8]={0};
@@ -63,7 +63,7 @@ int main() {
     creerJoueur(&joueur[2], 1, 0, 2,"Nord"); //, tabcarte[2]);
     creerJoueur(&joueur[3], 1, 1, 3, "Ouest"); //, tabcarte[3]);  //    afficherCarte(*joueur[3].carte);
 
-    
+    contrat(&joueur[0], tabcarte[0]);
 
 
 
@@ -129,7 +129,7 @@ int main() {
 
 **/
 
-    printf("Done \n");
+    printf("\n\nDone \n");
 
 
 
