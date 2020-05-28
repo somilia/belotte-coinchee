@@ -18,41 +18,49 @@ int main() {
 
     Carte paquet[32] = {0};
     creerPaquetCarte(paquet);
-
+/**
     printf("\npaquet non melange\n");
     for (int i = 0; i < 32; ++i)
     {
         printf("\n%d\n",i);
         afficherCarte(paquet[i]);
     }
-
-
-
-
+**/
    melange(paquet);
-
+/**
     printf("\npaquet melange\n");
     for (int i = 0; i < 32; ++i)
     {
         printf("\n%d\n",i);
         afficherCarte(paquet[i]);
     }
+**/
 
-    affichecarte(paquet[8]);
 
    // creerEquipe(&equipe, 0);
    // creerEquipe(&equipe, 1);
 
     char nom[20];
-    scanf("Entrer le nom du joueur %s", &nom);
+  //  scanf("Entrer le nom du joueur %s", &nom);
 
 
-    Carte jeu[7];
-    Carte jeuEst[7];
-    Carte jeuNord[7];
-    Carte jeuOuest[7];
+    Carte jeu[8];
+    Carte jeuEst[8];
+    Carte jeuNord[8];
+    Carte jeuOuest[8];
 
-  //  distribution(&paquet, &jeu, &jeuEst, &jeuNord, &jeuOuest);
+    distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest);
+    for (int i = 0; i<8; ++i)
+    {
+        printf("\nJeu: carte %d\n",i);
+        afficherCarte(jeu[i]);
+    }
+
+    for (int i = 0; i<8; ++i)
+    {
+        printf("\nJeu: carte %d\n",i);
+        afficherCarte(jeuEst[i]);
+    }
 
     //scanf("Entrer le nom du joueur %s", joueur[0].name);
 
@@ -125,8 +133,7 @@ int main() {
 **/
 
     printf("Done \n");
-    printf( "%s \n", joueur[0].name);
-    printf("%d", joueur[1].numJoueur);
+
 
 
 

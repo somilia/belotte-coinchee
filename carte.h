@@ -60,12 +60,13 @@ void creerPaquetCarte(Carte paquet[]);
 
 void affichecarte(Carte c);
 void afficherCarte(Carte carte);
+
 void permute(Carte *carte1, Carte *carte2);
 void melange(Carte *paquet);
+
+void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[]);
+
+
 //void melangeTest(int *tab, int n);
-void distribution(int *paquet, int *jeu, int *jeu1, int *jeu2, int *jeu3);
-
-
-
 
 #endif //PROJECTIFB_CARTE_H
