@@ -27,7 +27,9 @@ int main() {
     }
 
 
-    melange(&paquet, 32);
+
+
+   melange(paquet);
 
     printf("\npaquet melange\n");
     for (int i = 0; i < 32; ++i)
@@ -36,6 +38,7 @@ int main() {
         afficherCarte(paquet[i]);
     }
 
+    affichecarte(paquet[8]);
 
    // creerEquipe(&equipe, 0);
    // creerEquipe(&equipe, 1);
@@ -49,6 +52,7 @@ int main() {
     Carte jeuNord[7];
     Carte jeuOuest[7];
 
+  //  distribution(&paquet, &jeu, &jeuEst, &jeuNord, &jeuOuest);
 
     //scanf("Entrer le nom du joueur %s", joueur[0].name);
 

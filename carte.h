@@ -11,8 +11,8 @@ enum Couleur {
 
 typedef enum Valeur Valeur;
 enum Valeur {
-    HUIT,
     SEPT,
+    HUIT,
     NEUF,
     DIX,
     VALET,
@@ -58,13 +58,14 @@ struct Carte {
 void creerPaquetCarte(Carte paquet[]);
 
 
-
+void affichecarte(Carte c);
 void afficherCarte(Carte carte);
 void permute(Carte *carte1, Carte *carte2);
-void melangeTest(Carte paquet);
-//void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[])
+void melange(Carte *paquet);
+//void melangeTest(int *tab, int n);
+void distribution(int *paquet, int *jeu, int *jeu1, int *jeu2, int *jeu3);
 
-void melange(int *tab, int n);
+
 
 
 #endif //PROJECTIFB_CARTE_H

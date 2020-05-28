@@ -7,40 +7,100 @@
 #include "contrat.h"
 #include "carte.h"
 
-//void creerCarte(Couleur* couleur, Valeur* valeur){
-//
-//}
+
 
 void creerPaquetCarte(Carte paquet[]){
     Couleur couleurs[] = {TREFLE, CARREAU, COEUR, PIQUE};
-    Valeur valeurs[] = {VALET, NEUF, AS, DIX, ROI, DAME, HUIT, SEPT};
+    Valeur valeurs[] = {SEPT, HUIT, NEUF, DIX, VALET, DAME, ROI, AS};
     int ind = 0;
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 8; ++j) {
 //            printf("Valeur: %d\n", valeurs[i]);
 //            printf("Couleur: %d\n", couleurs[j]);
-            Carte carte;
+
+            paquet[ind].valeur=j;
+            paquet[ind].couleur=i;
+
+            /**Carte carte;
             carte.couleur = couleurs[i];
             carte.valeur = valeurs[j];
             paquet[ind] = carte;
             printf("\nIndice: %d\n", ind);
             printf("Valeur: %d\n", carte.valeur);
-            printf("Couleur: %d\n", carte.couleur);
+            printf("Couleur: %d\n", carte.couleur);**/
             ind++;
 
         }
     }
 }
 
+void affichecarte(Carte c)
+{
+    char *vcarte[]={"sept","huit","neuf","dix","valet","dame","roi","as"};
+    char *ccarte[]={"trefle","carreau","coeur","pique"};
+    printf(" %s ",vcarte[c.valeur]);
+    printf(" %s \n",ccarte[c.couleur]);
+
+}
+
 void afficherCarte(Carte carte)
 {
     printf("Valeur: %d\n", carte.valeur);
     printf("Couleur: %d\n", carte.couleur);
+    affichecarte(carte);
 }
 
-void melange(int *tab, int n)
+
+
+
+void permute(Carte *carte1, Carte *carte2)
 {
-    
+    Carte perm;
+    perm = *carte1,
+    *carte1 = *carte2;
+    *carte2=perm;
+}
+
+void melange(Carte *paquet)
+{
+
+    for(int i=0;i<=50;i++)
+    {
+        permute(&paquet[rand()%32], &paquet[rand()%32]);
+
+    }
+}
+
+
+/**
+void distribution(int *paquet, int *jeu, int *jeu1, int *jeu2, int *jeu3)
+{
+
+    Carte tab[3]={jeu, jeu1, jeu2, jeu3};
+    for(int j=0; j<4; j++)
+    {
+        int i=0;
+        int n=7;
+
+        for(i=0; i<n; i++)
+        {
+            tab[j]=paquet[i];
+        }
+
+        i+=7;
+        n+=7;
+    }
+
+
+}**/
+
+
+
+
+/**
+void melangeTest(int *tab, int n)
+{
+
     int i,nb2;
     nb2 = n;
     for(i=0;i<n;i++)
@@ -69,47 +129,5 @@ void melange(int *tab, int n)
         tab[i] = tab[j];
         tab[j] = tmp;
     }
-    **/
-
-}
-
-void permute(Carte *carte1, Carte *carte2)
-{
-    Carte perm;
-    perm = *carte1,
-    *carte1 = *carte2;
-    *carte2=perm;
-}
-/**
-void melangeTest(Carte paquet[])
-{
-
-    for(int i=0;i<=50;i++)
-    {
-        permute(&paquet[rand()%32], &paquet[rand()%32]);
-
-    }
-}**/
-
-
-/**
-void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[])
-{
-
-    Carte tab[3]={jeu[], jeu1[], jeu2[], jeu3[]};
-    for(int j=0; j<4; j++)
-    {
-        int i=0;
-        int n=7;
-
-        for(i=0; i<n; i++)
-        {
-            tab[j]=paquet[i];
-        }
-
-        int i+=7;
-        int n+=7;
-    }
-
 
 }**/
