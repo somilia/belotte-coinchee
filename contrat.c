@@ -1,7 +1,3 @@
-//
-// Created by soso_ on 19-May-20.
-//
-
 #include "contrat.h"
 #include "joueur.h"
 #include "equipe.h"

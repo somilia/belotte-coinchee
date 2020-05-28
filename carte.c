@@ -23,7 +23,7 @@ void creerPaquetCarte(Carte paquet[]){
             carte.couleur = couleurs[i];
             carte.valeur = valeurs[j];
             paquet[ind] = carte;
-            printf("Indice: %d\n", ind);
+            printf("\nIndice: %d\n", ind);
             printf("Valeur: %d\n", carte.valeur);
             printf("Couleur: %d\n", carte.couleur);
             ind++;
@@ -38,51 +38,78 @@ void afficherCarte(Carte carte)
     printf("Couleur: %d\n", carte.couleur);
 }
 
+void melange(int *tab, int n)
+{
+    
+    int i,nb2;
+    nb2 = n;
+    for(i=0;i<n;i++)
+    {
+        int tmp;
+        int index = rand()%nb2;
+        tmp = tab[index];
+        tab[index] = tab[nb2-1];
+        tab[n-i-1] = tmp;
+        nb2--;
+    }
 
+
+    /**
+    int i, j;
+    int tmp;
+
+    for( i=0; i< n-1; i++)
+    {
+        // j is a random number between i and n-1 (included)
+        j = i + rand() % (n-i);
+
+        //swap the values of tab[i] and tab[j]
+
+        tmp = tab[i];
+        tab[i] = tab[j];
+        tab[j] = tmp;
+    }
+    **/
+
+}
 
 void permute(Carte *carte1, Carte *carte2)
 {
     Carte perm;
     perm = *carte1,
-            *carte1 = *carte2;
+    *carte1 = *carte2;
     *carte2=perm;
 }
-
-void melange(Carte paquet[])
+/**
+void melangeTest(Carte paquet[])
 {
 
-    int i;
-    for(i=0;i<=50;i++)
+    for(int i=0;i<=50;i++)
     {
-        permute(&paquet[rand()%32],&paquet[rand()%32]);
-    }
+        permute(&paquet[rand()%32], &paquet[rand()%32]);
 
-}
+    }
+}**/
+
 
 /**
 void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[])
 {
 
-    int com1=0;
-    int com2=0;
-
-    for(int i=0; i<32; i++)
+    Carte tab[3]={jeu[], jeu1[], jeu2[], jeu3[]};
+    for(int j=0; j<4; j++)
     {
-        if (i%2!=0)
+        int i=0;
+        int n=7;
+
+        for(i=0; i<n; i++)
         {
-            jeu[com1]=paquet[i];
-            com1++;
+            tab[j]=paquet[i];
         }
-        if (i%3!=0)
-        {
-            jeu1[com2]=paquet[i];
-            com2++;
-        }
-        if (i%3!=0)
-        {
-            jeu1[com2]=paquet[i];
-            com2++;
-        }
+
+        int i+=7;
+        int n+=7;
     }
+
 
 }**/

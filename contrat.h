@@ -1,5 +1,3 @@
-
-
 #ifndef PROJECTIFB_CONTRAT_H
 #define PROJECTIFB_CONTRAT_H
 

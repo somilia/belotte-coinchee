@@ -18,10 +18,23 @@ int main() {
 
     Carte paquet[32] = {0};
     creerPaquetCarte(paquet);
-    for (int i = 0; i < 32; ++i) {
+
+    printf("\npaquet non melange\n");
+    for (int i = 0; i < 32; ++i)
+    {
+        printf("\n%d\n",i);
         afficherCarte(paquet[i]);
     }
 
+
+    melange(&paquet, 32);
+
+    printf("\npaquet melange\n");
+    for (int i = 0; i < 32; ++i)
+    {
+        printf("\n%d\n",i);
+        afficherCarte(paquet[i]);
+    }
 
 
    // creerEquipe(&equipe, 0);
@@ -31,8 +44,15 @@ int main() {
     scanf("Entrer le nom du joueur %s", &nom);
 
 
-    creerJoueur(&joueur[0], 0, 0, 0, nom);
+    Carte jeu[7];
+    Carte jeuEst[7];
+    Carte jeuNord[7];
+    Carte jeuOuest[7];
+
+
     //scanf("Entrer le nom du joueur %s", joueur[0].name);
+
+    creerJoueur(&joueur[0], 0, 0, 0, nom);
     creerJoueur(&joueur[1], 1, 1, 1, "Est");
     creerJoueur(&joueur[2], 1, 0, 2,"Nord");
     creerJoueur(&joueur[3], 1, 1, 3, "Ouest");
