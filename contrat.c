@@ -11,15 +11,8 @@ void contrat(Joueur *joueur, Carte *tabcarte)
     int *Pcontrat=&contrat;
     int *Pcouleur=&couleur;
 
-    joueur[0]=*joueur;       //Pour avoir accès à tout les joueurs
-    joueur[1]=*(joueur+1);   //Je sais pas si pas si c'est la meilleure facon
-    joueur[2]=*(joueur+2);
-    joueur[3]=*(joueur+3);
 
-    tabcarte[0]=*tabcarte;   //J'aurais aimé faire la meme chose mais je suis pas sur que ca marchera
-    tabcarte[1]=*(tabcarte+1);
-    tabcarte[2]=*(tabcarte+2);
-    tabcarte[3]=*(tabcarte+3);
+
   //  tabcarte[0][0]=*tabcarte[0];
 
     for (int i=0; i<=3; i++)
@@ -86,9 +79,9 @@ void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat, int 
 
 }
 
-
-void BotEnchere(Joueur *joueur[])
+//3 cartes fortes ->80 pts;     4 cartes fortes -> 120 pts
+void BotEnchere(Joueur *joueur[])     //3 cartes fortes d’une couleur annoncera contrat de 80 points pour cette couleur, 4 cartes fortes de cette couleur, annoncera un contrat de 120 points pour cette couleur
 {
-
+    
 }
 
