@@ -67,7 +67,7 @@ void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat, int 
         scanf("%d", &propositionCouleur);
         while ((propositionCouleur < 0) || (propositionCouleur > 5))
         {
-            printf("\nLa valeur de couleur doit etre comprise entre 1 et 4, Reessayer: \n");
+            printf("\nLa valeur de couleur doit etre comprise entre 0 et 5, Reessayer: \n");
             scanf("%d", propositionContrat);
         }
 
@@ -80,8 +80,31 @@ void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat, int 
 }
 
 //3 cartes fortes ->80 pts;     4 cartes fortes -> 120 pts
-void BotEnchere(Joueur *joueur[])     //3 cartes fortes d’une couleur annoncera contrat de 80 points pour cette couleur, 4 cartes fortes de cette couleur, annoncera un contrat de 120 points pour cette couleur
+void BotEnchere(Joueur *joueur, Carte *tabcarte)     //3 cartes fortes d’une couleur annoncera contrat de 80 points pour cette couleur, 4 cartes fortes de cette couleur, annoncera un contrat de 120 points pour cette couleur
 {
-    
+
+    int couleur0 = 0;
+    int couleur1 = 0;
+    int couleur2 = 0;
+    int couleur3 = 0;
+
+    for (int i=0; i<8; i++)
+    {
+        if (tabcarte[i].couleur==0){
+            couleur0++;
+        }
+        if (tabcarte[i].couleur==1){
+            couleur1++;
+        }
+        if (tabcarte[i].couleur==2){
+            couleur2++;
+        }
+        if (tabcarte[i].couleur==3){
+            couleur3++;
+        }
+    }
+    printf("\ncouleur0: %d; couleur1: %d; couleur2: %d; couleur3: %d;", couleur0, couleur1, couleur2, couleur3);
+
+
 }
 

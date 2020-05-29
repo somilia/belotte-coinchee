@@ -8,7 +8,7 @@ void contrat(Joueur *joueur, Carte *tabcarte);
 
 void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat, int *Pcouleur);
 
-void BotEnchere(Joueur *joueur[]);
+void BotEnchere(Joueur *joueur, Carte *tabcarte);
 
 
 
