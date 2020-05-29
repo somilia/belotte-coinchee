@@ -47,14 +47,14 @@ int main() {
     distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest); //Tout les joueurs ont 8 cartes identiques, je comprend pas pq
 
     Carte *tabcarte[4]={jeu, jeuEst, jeuNord, jeuOuest}; //Un tableau des 4 jeux mais je sais pas si c'est une bonne idee
-
+/**
     for (int i = 0; i<8; ++i)
     {
         printf("\nJeu du joueur 1: carte %d\n",i);
 
         afficherCarte(tabcarte[1][i]);
         pointcarte(tabcarte[1][i]);
-    }
+    }**/
 
 
     creerJoueur(&joueur[0], 0, 0, 0, "nom"); //, tabcarte[0]);
@@ -63,6 +63,14 @@ int main() {
     creerJoueur(&joueur[3], 1, 1, 3, "Ouest"); //, tabcarte[3]);  //    afficherCarte(*joueur[3].carte);
 
     contrat(&joueur[0], tabcarte[0]);
+
+    for (int i = 0; i<8; ++i)
+    {
+        printf("\nJeu du joueur 0: carte %d\n",i);
+
+        afficherCarte(tabcarte[0][i]);
+        //pointcarte(tabcarte[0][i]);
+    }
 
     BotEnchere(&joueur[0], tabcarte[0]);
 

@@ -79,7 +79,7 @@ void affichecarte(Carte c)
     char *vcarte[]={"sept","huit","neuf","dix","valet","dame","roi","as"};
     char *ccarte[]={"trefle","carreau","coeur","pique"};
     printf(" %s ",vcarte[c.valeur]);
-   // printf(" %s \n",ccarte[c.couleur]);
+    printf(" %s \n",ccarte[c.couleur]);
 }
 
 void afficherCarte(Carte carte)
@@ -87,6 +87,7 @@ void afficherCarte(Carte carte)
     printf("Valeur: %d\n", carte.valeur);
     printf("Couleur: %d\n", carte.couleur);
     affichecarte(carte);
+    printf("\n");
 }
 
 
