@@ -9,6 +9,10 @@
 #include "equipe.h"
 #include "joueur.h"
 
+#define POSER_SUCCES    1
+#define POSER_PLEIN     2
+#define POSER_ECHEC     0
+
 void initPaquetCarte(Carte paquet[]) {
     Couleur couleurs[] = {TREFLE, CARREAU, COEUR, PIQUE};
     Valeur valeurs[] = {SEPT, HUIT, NEUF, DIX, VALET, DAME, ROI, AS};
@@ -24,6 +28,23 @@ void initPaquetCarte(Carte paquet[]) {
 Carte creerCarte(Couleur c, Valeur v) {
     Carte carte = {c, v};
     return carte;
+}
+
+void poserCarte(Carte **source, Jeu *jeu) {
+    if (source == NULL) {
+        return POSER_ECHEC;
+    }
+
+    if (jeu->nbCartes >= 4) {
+        return POSER_PLEIN;
+    }
+
+    jeu->pile[jeu->nbCartes] = *source;
+    *source = NULL;
+
+    jeu->nbCartes++;
+
+    return POSER_SUCCES;
 }
 
 int pointcarte(Carte c /*, int atout*/)  // Test
@@ -79,9 +100,14 @@ void afficherCarte(Carte carte) {
            couleurToString(carte.couleur));
 }
 
-void afficherPaquet(Carte *paquet, int nbCartes) {
+void afficherPaquet(Carte **paquet, int nbCartes) {
     for (int i = 0; i < nbCartes; ++i) {
-        afficherCarte(paquet[i]);
+        printf("%d. ", i + 1);
+        if (paquet[i] == NULL) {
+            printf(" ---\n");
+        } else {
+            afficherCarte(*paquet[i]);
+        }
     }
 }
 
@@ -105,9 +131,8 @@ void melanger(Carte *paquet, int nbMelange) {
 void distribuer(Joueur joueurs[4], Carte paquet[TAILLE_PAQUET]) {
     int counter = 0;
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 8; j++)
-        {
-            joueurs[i].carte[j] = paquet[counter];
+        for (int j = 0; j < 8; j++) {
+            joueurs[i].carte[j] = &paquet[counter];
             counter++;
         }
     }

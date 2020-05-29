@@ -6,13 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "common.h"
 #include "joueur.h"
-
-typedef struct Equipe Equipe;
-struct Equipe {
-    int id;
-    int score;
-};
 
 Equipe creerEquipe(int id);
 

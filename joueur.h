@@ -4,21 +4,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include "common.h"
 #include "equipe.h"
 #include "carte.h"
 
-typedef struct Joueur Joueur;
+Joueur creerJoueur(int id, char* nom, struct Equipe* equipe, bool isBot);
 
-struct Joueur {
-    int id;
-    char nom[20];
-    struct Equipe *equipe;
-    bool isBot;
-    Carte carte[8];
-};
-
-Joueur creerJoueur(int id, char* nom, Equipe* equipe, bool isBot);
-
+void afficherJoueur(Joueur j);
 
 
 #endif //PROJECTIFB_JOUEUR_H

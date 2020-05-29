@@ -4,14 +4,6 @@
 #include "equipe.h"
 #include "joueur.h"
 
-typedef enum Atout Atout;
-enum Atout { TREFLE_ATOUT, CARREAU_ATOUT, COEUR_ATOUT, PIQUE_ATOUT, SANS_ATOUT, TOUT_ATOUT };
-
-typedef struct Contrat {
-    int valeur;
-    enum Atout atout;
-} Contrat;
-
 static inline const char* atoutToString(enum Atout a) {
     static const char* atouts[] = {
         "Trefle",
@@ -25,7 +17,9 @@ static inline const char* atoutToString(enum Atout a) {
     return atouts[a];
 }
 
-void contrat(Joueur *joueur, Carte *tabcarte);
+Contrat creerContrat(int valeur, Atout atout, Equipe* equipe);
+
+
 
 void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat,
                    int *Pcouleur);
