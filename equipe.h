@@ -2,26 +2,18 @@
 #ifndef PROJECTIFB_EQUIPE_H
 #define PROJECTIFB_EQUIPE_H
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #include "joueur.h"
 
-
 typedef struct Equipe Equipe;
 struct Equipe {
-    bool numEquipe;
+    int id;
     int score;
 };
 
-Equipe equipe;
+Equipe creerEquipe(int id);
 
-void creerEquipe(Equipe* equipe, bool numEquipe);
-
-
-
-
-
-
-#endif //PROJECTIFB_EQUIPE_H
+#endif  // PROJECTIFB_EQUIPE_H

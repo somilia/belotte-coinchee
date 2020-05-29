@@ -6,9 +6,12 @@
 #include "equipe.h"
 #include "joueur.h"
 
-void creerEquipe(Equipe* equipe, bool numEquipe)
+Equipe creerEquipe(int id)
 {
-    equipe->numEquipe=numEquipe;
-    equipe->score=0;
+    Equipe equipe;
+    equipe.id = id;
+    equipe.score = 0;
+
+    return equipe;
 }
 

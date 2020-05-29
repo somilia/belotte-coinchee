@@ -1,7 +1,15 @@
 #ifndef PROJECTIFB_CARTE_H
 #define PROJECTIFB_CARTE_H
 
+#include "joueur.h"
+
+#define TAILLE_PAQUET 32
+
+typedef struct Carte Carte;
 typedef enum Couleur Couleur;
+typedef enum Valeur Valeur;
+
+
 enum Couleur {
     TREFLE,
     CARREAU,
@@ -9,7 +17,6 @@ enum Couleur {
     PIQUE
 };
 
-typedef enum Valeur Valeur;
 enum Valeur {
     SEPT,
     HUIT,
@@ -21,53 +28,40 @@ enum Valeur {
     AS,
 };
 
-
-/**
-typedef enum Valeur Valeur;
-enum Valeur {
-    VALET=20,
-    NEUF=14,
-    AS=11,
-    DIX=10,
-    ROI=4,
-    DAME=3,
-    HUIT=0,
-    SEPT=0
-};**/
-/**
-typedef enum Valeur_HA Valeur_HA;
-enum Valeur_HA {
-    VALET=2,
-    NEUF=0,
-    AS=11,
-    DIX=10,
-    ROI=4,
-    DAME=3,
-    HUIT=0,
-    SEPT=0
-}; **/
-
-
-typedef struct Carte Carte;
 struct Carte {
     Couleur couleur;
     Valeur valeur;
 };
 
-Carte carte;
 
-void creerPaquetCarte(Carte paquet[]);
+
+
+static inline const char* couleurToString(Couleur c) {
+    static const char* str_couleur[] = {"Trefle","Carreau","Coeur","Pique"};
+    return str_couleur[c];
+}
+
+static inline const char* valeurToString(Valeur v) {
+    static const char* str_valeur[] = {"Sept","Huit","Neuf","Dix","Valet","Dame","Roi","As"};
+    return str_valeur[v];
+}
+
+
+Carte creerCarte(Couleur c, Valeur v);
+void carteToString(Carte carte, char *output);
+
+void initPaquetCarte(Carte paquet[]);
 
 int pointcarte(Carte c/*, int atout*/);
 
-void affichecarte(Carte c);
 void afficherCarte(Carte carte);
 
+void afficherPaquet(Carte *paquet, int nbCartes);
+
 void permute(Carte *carte1, Carte *carte2);
-void melange(Carte *paquet);
+void melanger(Carte *paquet, int nbMelange);
 
-void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[]);
-
+void distribuer(Joueur joueurs[4], Carte paquet[TAILLE_PAQUET]);
 
 //void melangeTest(int *tab, int n);
 
