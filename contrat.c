@@ -4,36 +4,37 @@
 #include "menuenchere.h"
 
 
-void contrat(Joueur *joueur, Carte tabcarte[])
+void contrat(Joueur *joueur, Carte *tabcarte)
 {
     int contrat=0;
     int couleur=0;
     int *Pcontrat=&contrat;
     int *Pcouleur=&couleur;
 
-    joueur[0]=*joueur;
-    joueur[1]=*(joueur+1);
+    joueur[0]=*joueur;       //Pour avoir accès à tout les joueurs
+    joueur[1]=*(joueur+1);   //Je sais pas si pas si c'est la meilleure facon
     joueur[2]=*(joueur+2);
     joueur[3]=*(joueur+3);
 
-    tabcarte[0]=*tabcarte;
+    tabcarte[0]=*tabcarte;   //J'aurais aimé faire la meme chose mais je suis pas sur que ca marchera
     tabcarte[1]=*(tabcarte+1);
     tabcarte[2]=*(tabcarte+2);
     tabcarte[3]=*(tabcarte+3);
+  //  tabcarte[0][0]=*tabcarte[0];
 
     for (int i=0; i<=3; i++)
     {
 
-      /**  if (joueur[i].bot == 0)
+        if (joueur[i].bot == 0)
         {
-            printf("\n ui");
+            printf("\n ui\n");
           //  JoueurEnchere(&joueur[0], contrat, couleur, Pcontrat, Pcouleur);
         }
         else {
             //BotEnchere(&joueur[i]);
             printf("\n nn\n");
         }
-       // printf("La proposition de contrat est de %d", *Pcontrat); **/
+       // printf("La proposition de contrat est de %d", *Pcontrat);
 
         afficherCarte(tabcarte[1]);
         printf("\n");
@@ -69,9 +70,9 @@ void JoueurEnchere(Joueur *joueur, int contrat, int couleur, int *Pcontrat, int 
 
 
 
-        printf("Entrer une couleur: \nen choisissant une valeur entre 1 et 4 \n1: TREFLE, 2: CARREAU, 3: PIQUE, 4: COEUR\n");
+        printf("Entrer une couleur: \nen choisissant une valeur entre 0 et 5 \n0: TREFLE, 1: CARREAU, 2: COEUR, 3: PIQUE, 4: SANS ATOUT, 5: TOUT ATOUT\n");
         scanf("%d", &propositionCouleur);
-        while ((propositionCouleur < 0) || (propositionCouleur > 4))
+        while ((propositionCouleur < 0) || (propositionCouleur > 5))
         {
             printf("\nLa valeur de couleur doit etre comprise entre 1 et 4, Reessayer: \n");
             scanf("%d", propositionContrat);

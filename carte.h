@@ -58,6 +58,7 @@ Carte carte;
 
 void creerPaquetCarte(Carte paquet[]);
 
+int pointcarte(Carte c/*, int atout*/);
 
 void affichecarte(Carte c);
 void afficherCarte(Carte carte);

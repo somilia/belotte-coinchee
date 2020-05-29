@@ -24,7 +24,7 @@ int main() {
         afficherCarte(paquet[i]);
     }
 **/
-   melange(paquet);
+   melange(paquet); //Le melange fonctionne bien
 /**
     printf("\n paquet melange\n");
     for (int i = 0; i < 32; ++i)
@@ -35,10 +35,8 @@ int main() {
 **/
 
 
- //   creerEquipe(&equipe, 0);
- //   creerEquipe(&equipe, 1);
-
-    char nom[20] ={'S','O', 'S', 'O'};     //  scanf("Entrer le nom du joueur %s", &nom);   //printf("Entrer le nom du joueur"); scanf("%s", &joueur[0].name);
+ //   creerEquipe(&equipe, 0);  //   creerEquipe(&equipe, 1);
+  //  char nom[20] ={'S','O', 'S', 'O'};     //  scanf("Entrer le nom du joueur %s", &nom);   //printf("Entrer le nom du joueur"); scanf("%s", &joueur[0].name);
 
 
     Carte jeu[8]={0};
@@ -46,15 +44,16 @@ int main() {
     Carte jeuNord[8]={0};
     Carte jeuOuest[8]={0};
 
-    distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest);
+    distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest); //Tout les joueurs ont 8 cartes identiques, je comprend pas pq
 
-    Carte *tabcarte[4]={jeu, jeuEst, jeuNord, jeuOuest};
+    Carte *tabcarte[4]={jeu, jeuEst, jeuNord, jeuOuest}; //Un tableau des 4 jeux mais je sais pas si c'est une bonne idee
 
     for (int i = 0; i<8; ++i)
     {
         printf("\nJeu du joueur 1: carte %d\n",i);
 
         afficherCarte(tabcarte[1][i]);
+        pointcarte(tabcarte[1][i]);
     }
 
 

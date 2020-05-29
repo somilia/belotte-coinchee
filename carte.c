@@ -34,13 +34,52 @@ void creerPaquetCarte(Carte paquet[]){
     }
 }
 
+int pointcarte(Carte c/*, int atout*/) //Test
+{
+    int point=0;
+
+  /**  switch(atout) {
+        case 0: //Trefle
+            *ptcarte[] = {0, 0, 14, 10, 20, 3, 4, 19};
+            break;
+        case 1: //Carreau
+            *ptcarte[] = {0, 0, 14, 10, 20, 3, 4, 19};
+            break;
+        case 2: //Coeur
+            *ptcarte[] = {0, 0, 14, 10, 20, 3, 4, 19};
+            break;
+        case 3: //Pique
+            *ptcarte[] = {0, 0, 14, 10, 20, 3, 4, 19};
+            break;
+        case 4: //Sans Atout
+            *ptcarte[] = {0, 0, 0, 10, 2, 3, 4, 19};
+            break;
+        case 5: //Tout Atout
+            *ptcarte[] = {0, 0, 9, 5, 14, 1, 3, 6};
+            break;
+        case 6:
+            exit(1);
+        default:
+            printf("Erreur valeur d'atout");
+
+    }**/
+
+    int ptcarte[]={0, 0, 0, 10, 2, 3, 4, 19};
+    char *ccarte[]={"trefle","carreau","coeur","pique"};
+    printf("Point carte %d \n", ptcarte[c.valeur]);
+    printf(" %s \n",ccarte[c.couleur]);
+
+    point=ptcarte[c.valeur];
+
+    return point;
+}
+
 void affichecarte(Carte c)
 {
     char *vcarte[]={"sept","huit","neuf","dix","valet","dame","roi","as"};
     char *ccarte[]={"trefle","carreau","coeur","pique"};
     printf(" %s ",vcarte[c.valeur]);
-    printf(" %s \n",ccarte[c.couleur]);
-
+   // printf(" %s \n",ccarte[c.couleur]);
 }
 
 void afficherCarte(Carte carte)
@@ -79,7 +118,7 @@ void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte
 
     for(int i=0;i<32;i=i+4)
     {
-        for (int p=0; p<8; p++)
+        for (int p=0; p<4; p++)
         {
             jeu[p] = paquet[i];
             jeu1[p] = paquet[i+1];
