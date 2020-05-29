@@ -63,23 +63,3 @@ int main() {
         switch(choixMenu) {
             case 1:
                 printf("Vous avez choisi de demarrer une partie\n");
-
-                contrat(&joueur[0]);
-
-               break;
-            case 2:
-                printf("Vous avez choisi d'afficher le tableau des scores\n");
-                break;
-            case 3:
-                exit(1);
-            default:
-                printf("Vous devez choisir 1, 2 ou 3");
-        }
-    **/
-
-    
-
-    printf("\n\nDone \n");
-
-    return 0;
-}
