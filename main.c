@@ -64,7 +64,7 @@ int main() {
 
     contrat(&joueur[0], tabcarte[0]);
 
-
+    BotEnchere(&joueur[0], tabcarte[0]);
 
 /**
 
