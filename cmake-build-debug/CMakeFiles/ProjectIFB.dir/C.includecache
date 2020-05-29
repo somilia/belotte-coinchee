@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.c
+stdio.h
+-
+stdlib.h
+-
+stdbool.h
+-
+string.h
+-
+joueur.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/joueur.h
+equipe.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/equipe.h
+contrat.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/contrat.h
+carte.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.h
+
 C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.h
 
 C:/Users/soso_/Documents/GitHub/ProjectIFB/contrat.c
@@ -45,6 +63,26 @@ equipe.h
 C:/Users/soso_/Documents/GitHub/ProjectIFB/equipe.h
 carte.h
 C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.h
+
+C:/Users/soso_/Documents/GitHub/ProjectIFB/main.c
+stdio.h
+-
+stdlib.h
+-
+stdbool.h
+-
+string.h
+-
+time.h
+-
+carte.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/carte.h
+joueur.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/joueur.h
+equipe.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/equipe.h
+contrat.h
+C:/Users/soso_/Documents/GitHub/ProjectIFB/contrat.h
 
 C:/Users/soso_/Documents/GitHub/ProjectIFB/menuenchere.h
 
