@@ -1,4 +1,3 @@
-
 #ifndef PROJECTIFB_CARTE_H
 #define PROJECTIFB_CARTE_H
 
@@ -12,8 +11,8 @@ enum Couleur {
 
 typedef enum Valeur Valeur;
 enum Valeur {
-    HUIT,
     SEPT,
+    HUIT,
     NEUF,
     DIX,
     VALET,
@@ -55,14 +54,21 @@ struct Carte {
     Valeur valeur;
 };
 
+Carte carte;
 
-void creerPaquetCarte();
+void creerPaquetCarte(Carte paquet[]);
 
+int pointcarte(Carte c/*, int atout*/);
 
+void affichecarte(Carte c);
 void afficherCarte(Carte carte);
-void permute(Carte *carte1, Carte *carte2);
-void melange(Carte paquet[]);
-//void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[])
 
+void permute(Carte *carte1, Carte *carte2);
+void melange(Carte *paquet);
+
+void distribution(Carte paquet[], Carte jeu[], Carte jeu1[], Carte jeu2[], Carte jeu3[]);
+
+
+//void melangeTest(int *tab, int n);
 
 #endif //PROJECTIFB_CARTE_H

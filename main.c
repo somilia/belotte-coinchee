@@ -12,30 +12,58 @@
 
 
 int main() {
-
     srand(time(NULL));
-
 
     Carte paquet[32] = {0};
     creerPaquetCarte(paquet);
-    for (int i = 0; i < 32; ++i) {
+/**
+    printf("\n paquet non melange\n");
+    for (int i = 0; i < 32; ++i)
+    {
+        printf("\n%d\n",i);
         afficherCarte(paquet[i]);
+    }
+**/
+   melange(paquet); //Le melange fonctionne bien
+/**
+    printf("\n paquet melange\n");
+    for (int i = 0; i < 32; ++i)
+    {
+        printf("\n%d\n",i);
+        afficherCarte(paquet[i]);
+    }
+**/
+
+
+ //   creerEquipe(&equipe, 0);  //   creerEquipe(&equipe, 1);
+  //  char nom[20] ={'S','O', 'S', 'O'};     //  scanf("Entrer le nom du joueur %s", &nom);   //printf("Entrer le nom du joueur"); scanf("%s", &joueur[0].name);
+
+
+    Carte jeu[8]={0};
+    Carte jeuEst[8]={0};
+    Carte jeuNord[8]={0};
+    Carte jeuOuest[8]={0};
+
+    distribution(paquet, jeu, jeuEst, jeuNord, jeuOuest); //Tout les joueurs ont 8 cartes identiques, je comprend pas pq
+
+    Carte *tabcarte[4]={jeu, jeuEst, jeuNord, jeuOuest}; //Un tableau des 4 jeux mais je sais pas si c'est une bonne idee
+
+    for (int i = 0; i<8; ++i)
+    {
+        printf("\nJeu du joueur 1: carte %d\n",i);
+
+        afficherCarte(tabcarte[1][i]);
+        pointcarte(tabcarte[1][i]);
     }
 
 
+    creerJoueur(&joueur[0], 0, 0, 0, "nom"); //, tabcarte[0]);
+    creerJoueur(&joueur[1], 1, 1, 1, "Est"); //, tabcarte[1]);
+    creerJoueur(&joueur[2], 1, 0, 2,"Nord"); //, tabcarte[2]);
+    creerJoueur(&joueur[3], 1, 1, 3, "Ouest"); //, tabcarte[3]);  //    afficherCarte(*joueur[3].carte);
 
-   // creerEquipe(&equipe, 0);
-   // creerEquipe(&equipe, 1);
+    contrat(&joueur[0], tabcarte[0]);
 
-    char nom[20];
-    scanf("Entrer le nom du joueur %s", &nom);
-
-
-    creerJoueur(&joueur[0], 0, 0, 0, nom);
-    //scanf("Entrer le nom du joueur %s", joueur[0].name);
-    creerJoueur(&joueur[1], 1, 1, 1, "Est");
-    creerJoueur(&joueur[2], 1, 0, 2,"Nord");
-    creerJoueur(&joueur[3], 1, 1, 3, "Ouest");
 
 
 /**
@@ -100,9 +128,8 @@ int main() {
 
 **/
 
-    printf("Done \n");
-    printf( "%s \n", joueur[0].name);
-    printf("%d", joueur[1].numJoueur);
+    printf("\n\nDone \n");
+
 
 
 

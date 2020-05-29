@@ -1,7 +1,5 @@
-
 #ifndef PROJECTIFB_JOUEUR_H
 #define PROJECTIFB_JOUEUR_H
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -19,11 +17,17 @@ struct Joueur {
     bool isCapot;
     bool choseAtout;
     bool bot;
- //   Carte *jeu[];
+    struct Carte *carte;
 };
 
 Joueur joueur[3];
 
-void creerJoueur(Joueur* joueur, bool bot, bool numEquipe, int numJoueur, char name[]);
+
+void creerJoueur(Joueur *joueur, bool bot, bool numEquipe, int numJoueur, char name[]/*, Carte carte[]*/);
+
+
+
+
+
 
 #endif //PROJECTIFB_JOUEUR_H
