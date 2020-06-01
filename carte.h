@@ -19,10 +19,11 @@ static inline const char* valeurToString(Valeur v) {
 Carte creerCarte(Couleur c, Valeur v);
 void carteToString(Carte carte, char* output);
 
-void poserCarte(Carte** source, Jeu* jeu);
+int poserCarte(Carte** source, Jeu* jeu);
 
 void initPaquetCarte(Carte paquet[]);
 
+int pointsCarte(Carte carte, Contrat contrat);
 int pointcarte(Carte c /*, int atout*/);
 
 void afficherCarte(Carte carte);

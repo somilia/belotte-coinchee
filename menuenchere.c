@@ -21,7 +21,7 @@ int afficheMenuEnchere()
     printf("*           Belote coinch%ce            *\n",130);
     printf("*                                      *\n");
     printf("****************************************\n");
-    printf("\nPhase d'ench%cre...\n\n",138);
+    printf("\nPhase d'enchère...\n\n",138);
     printf("------------------------------------------------\n");
     printf("vos cartes : ");
     printf("JoueurX annoncec");

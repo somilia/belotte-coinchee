@@ -9,41 +9,7 @@ Contrat creerContrat(int valeur, Atout atout, Equipe* equipe) {
     c.atout = atout;
     c.equipe = equipe;
 
-<<<<<<< HEAD
     return c;
-=======
-void contrat(Joueur *joueur, Carte *tabcarte)
-{
-    int contrat=0;
-    int couleur=0;
-    int *Pcontrat=&contrat;
-    int *Pcouleur=&couleur;
-
-
-
-  //  tabcarte[0][0]=*tabcarte[0];
-
-    for (int i=0; i<=3; i++)
-    {
-
-        if (joueur[i].bot == 0)
-        {
-            printf("\n ui\n");
-          //  JoueurEnchere(&joueur[0], contrat, couleur, Pcontrat, Pcouleur);
-        }
-        else {
-            //BotEnchere(&joueur[i]);
-            printf("\n nn\n");
-        }
-       // printf("La proposition de contrat est de %d", *Pcontrat);
-
-        afficherCarte(tabcarte[1]);
-        printf("\n");
-        afficherCarte(tabcarte[2]);
-        printf("\n");
-    }
-
->>>>>>> f8cecbf26fc869859638f7d753864ef94d24e59e
 }
 
 

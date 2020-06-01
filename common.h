@@ -17,23 +17,23 @@ typedef struct Contrat Contrat;
 typedef struct Jeu Jeu;
 
 enum Atout {
-    TREFLE_ATOUT,
-    CARREAU_ATOUT,
-    COEUR_ATOUT,
-    PIQUE_ATOUT,
-    SANS_ATOUT,
-    TOUT_ATOUT
+    TREFLE_ATOUT    = 0,
+    CARREAU_ATOUT   = 1,
+    COEUR_ATOUT     = 2,
+    PIQUE_ATOUT     = 3,
+    SANS_ATOUT      = 4,
+    TOUT_ATOUT      = 5
 };
-enum Couleur { TREFLE, CARREAU, COEUR, PIQUE };
+enum Couleur { TREFLE = 0, CARREAU = 1, COEUR = 2, PIQUE = 3 };
 enum Valeur {
-    SEPT,
-    HUIT,
-    NEUF,
-    DIX,
-    VALET,
-    DAME,
-    ROI,
-    AS,
+    SEPT = 0,
+    HUIT = 1,
+    NEUF = 2,
+    DIX = 3,
+    VALET = 4,
+    DAME = 5,
+    ROI = 6,
+    AS = 7,
 };
 
 struct Carte {
@@ -62,6 +62,9 @@ struct Contrat {
 struct Jeu {
     Contrat contrat;
     Carte* pile[4];
+    Joueur* joueurs;
+    Joueur* joueurActuel;
+    int donneur;
     int nbCartes;
     int nbTours;
 };

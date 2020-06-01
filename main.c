@@ -33,7 +33,7 @@ int main() {
 
     afficherJoueur(joueurs[0]);
 
-    Jeu jeu = creerJeu();
+    Jeu jeu = creerJeu(joueurs);
 
     printf("\n\n");
     poserCarte(&joueurs[0].carte[0], &jeu);
@@ -62,4 +62,7 @@ int main() {
         scanf("%d", &choixMenu);
         switch(choixMenu) {
             case 1:
-                printf("Vous avez choisi de demarrer une partie\n");
+                printf("Vous avez choisi de demarrer une partie\n");*/
+
+
+    }

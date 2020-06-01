@@ -30,7 +30,7 @@ Carte creerCarte(Couleur c, Valeur v) {
     return carte;
 }
 
-void poserCarte(Carte **source, Jeu *jeu) {
+int poserCarte(Carte **source, Jeu *jeu) {
     if (source == NULL) {
         return POSER_ECHEC;
     }
@@ -47,53 +47,21 @@ void poserCarte(Carte **source, Jeu *jeu) {
     return POSER_SUCCES;
 }
 
-int pointcarte(Carte c /*, int atout*/)  // Test
-{
-    int point = 0;
+int pointsCarte(Carte carte, Contrat contrat) {
+    switch(contrat.atout) {
+        case TOUT_ATOUT:
+            return POINTS_TA[carte.valeur];
+        case SANS_ATOUT:
+            return POINTS_SA[carte.valeur];
+    }
 
-    /** int ptcarteSA[] = {0, 0, 0, 10, 2, 3, 4, 19};
-     int ptcarteTA[] = {0, 0, 9, 5, 14, 1, 3, 6};
-
-     if (atout==5){  //Tout Atout
-
-     }
-     else {
-
-     }**/
-    /**
-        switch(atout) {
-          case 0: //Trefle
-
-              break;
-          case 1: //Carreau
-
-              break;
-          case 2: //Coeur
-
-              break;
-          case 3: //Pique
-
-              break;
-          case 4: //Sans Atout
-
-              break;
-          case 5: //Tout Atout
-
-              break;
-          case 6:
-              exit(1);
-          default:
-              printf("Erreur valeur d'atout");
-        }**/
-
-    /** char *ccarte[]={"trefle","carreau","coeur","pique"};
-     printf("Point carte %d \n", ptcarte[c.valeur]);
-     printf(" %s \n",ccarte[c.couleur]);
-
-     point=ptcarte[c.valeur];
-
-     return point;**/
+    if (carte.couleur == contrat.atout) {
+        return POINTS_TA[carte.valeur];
+    } else {
+        return POINTS_SA[carte.valeur];
+    }
 }
+
 
 void afficherCarte(Carte carte) {
     printf("%s de %s\n", valeurToString(carte.valeur),

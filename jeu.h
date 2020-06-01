@@ -5,10 +5,9 @@
 
 Jeu creerJeu();
 
-void retirerCartes(Jeu* jeu);
+void resetPile(Jeu* jeu);
 
 void afficherJeu(Jeu* jeu);
-
 
 
 #endif

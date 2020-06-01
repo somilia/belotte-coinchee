@@ -25,5 +25,5 @@ void afficherJoueur(Joueur j) {
     printf("Equipe: %d\n", j.equipe->id);
     printf("Cartes:\n");
     afficherPaquet(j.carte, 8);
-    printf("\n")
+    printf("\n");
 }
