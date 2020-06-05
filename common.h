@@ -91,11 +91,16 @@ struct EtatEnchere {
 
 struct Jeu {
     struct EtatEnchere derniereEnchere;
+
     Carte* pile[4];
+    Carte* entame;
+
+    int nbCartes;
+
+    int donneur;
     Joueur* joueurs;
     Joueur* joueurActuel;
-    int donneur;
-    int nbCartes;
+    
     int nbTours;
 };
 
