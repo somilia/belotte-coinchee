@@ -16,15 +16,24 @@ typedef struct Contrat Contrat;
 
 typedef struct Jeu Jeu;
 
+enum ChoixEnchere {
+    PASSER,
+    ENCHERIR,
+    CAPOT,
+    COINCHER,
+    SURCOINCHER,
+};
+
 enum Atout {
-    TREFLE_ATOUT    = 0,
-    CARREAU_ATOUT   = 1,
-    COEUR_ATOUT     = 2,
-    PIQUE_ATOUT     = 3,
-    SANS_ATOUT      = 4,
-    TOUT_ATOUT      = 5
+    TREFLE_ATOUT = 0,
+    CARREAU_ATOUT = 1,
+    COEUR_ATOUT = 2,
+    PIQUE_ATOUT = 3,
+    SANS_ATOUT = 4,
+    TOUT_ATOUT = 5
 };
 enum Couleur { TREFLE = 0, CARREAU = 1, COEUR = 2, PIQUE = 3 };
+
 enum Valeur {
     SEPT = 0,
     HUIT = 1,
@@ -44,7 +53,7 @@ struct Carte {
 struct Joueur {
     int id;
     char nom[20];
-    struct Equipe *equipe;
+    Equipe* equipe;
     bool isBot;
     Carte* carte[8];
 };
@@ -57,22 +66,37 @@ struct Contrat {
     int valeur;
     enum Atout atout;
     Equipe* equipe;
-};
-
-struct Jeu {
-    Contrat contrat;
-    Carte* pile[4];
-    Joueur* joueurs;
-    Joueur* joueurActuel;
-    int donneur;
-    int nbCartes;
-    int nbTours;
+    bool capot;
 };
 
 typedef struct NodeCarte NodeCarte;
 struct NodeCarte {
     Carte carte;
     NodeCarte* suivant;
+};
+
+struct EtatEnchere {
+    Contrat dernierContrat;
+
+    bool encheri;
+    int nbTour;
+    Equipe* coinche;
+    Equipe* surcoinche;
+
+    Joueur* joueurCoinche;
+
+    int passConsecutif;
+    bool hasCapot;
+};
+
+struct Jeu {
+    struct EtatEnchere derniereEnchere;
+    Carte* pile[4];
+    Joueur* joueurs;
+    Joueur* joueurActuel;
+    int donneur;
+    int nbCartes;
+    int nbTours;
 };
 
 #endif

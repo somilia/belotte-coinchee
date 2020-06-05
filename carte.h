@@ -23,8 +23,8 @@ int poserCarte(Carte** source, Jeu* jeu);
 
 void initPaquetCarte(Carte paquet[]);
 
+// Retourne la valeur de la carte en fonction du contrat
 int pointsCarte(Carte carte, Contrat contrat);
-int pointcarte(Carte c /*, int atout*/);
 
 void afficherCarte(Carte carte);
 

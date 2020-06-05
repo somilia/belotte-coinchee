@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "contrat.h"
 #include "equipe.h"
 #include "joueur.h"
+#include "enchere.h"
 
 #define POSER_SUCCES    1
 #define POSER_PLEIN     2
@@ -56,12 +56,11 @@ int pointsCarte(Carte carte, Contrat contrat) {
     }
 
     if (carte.couleur == contrat.atout) {
-        return POINTS_TA[carte.valeur];
+        return POINTS_ATOUT[carte.valeur];
     } else {
-        return POINTS_SA[carte.valeur];
+        return POINTS_HORS_ATOUT[carte.valeur];
     }
 }
-
 
 void afficherCarte(Carte carte) {
     printf("%s de %s\n", valeurToString(carte.valeur),

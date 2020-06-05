@@ -4,7 +4,7 @@
 #include <string.h>
 #include "joueur.h"
 #include "equipe.h"
-#include "contrat.h"
+
 #include "carte.h"
 
 Joueur creerJoueur(int id, char* nom, Equipe* equipe, bool isBot) {
