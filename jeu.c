@@ -42,21 +42,100 @@ void afficherJeu(Jeu* jeu) {
 // On peut jouer une carte si :
 //      - Elle est de la couleur de l'entame
 //      - Si c'est un atout et que personne n'a coupé
+//      - Si on est défaussé
+//      - Si la couleur de l'entame est celle de l'atout et que la carte est plus forte
+//  
+
+bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
+    Contrat contrat = jeu->enchere.contrat;
+    Joueur partenaire = jeu->
+
+    if (jeu->atoutPose == NULL && carte.couleur == jeu->entame->couleur) {
+        return true;
+    }
+
+    if (jeu->atoutPose == NULL && carte.couleur == contrat.atout) {
+        return true;
+    }
+
+    if (jeu->atoutPose
+        && carte.couleur == contrat.atout
+        && pointsCarte(carte, contrat) > pointsCarte(*jeu->atoutPose, contrat)
+    ) {
+        return true;
+    }
+
+    if (carte.couleur != jeu->entame->couleur &&)
 
 
-bool carteValide(Jeu* jeu, Carte carte) {
 
+    return false;
 }
 
-// Jouer la couleur demandée à l'entame (première carte jouée)
-// Si pas possible
-// ->Possède un atout
-//   ->Jouer un atout
-//   ->Sauf si notre partenaire est maître (sa carte posé est la plus haute) 
-//      =>Jouer n'importe quelle carte
-// ->Ne possède pas d'atout
-//   ->Jouer n'importe quelle carte
+void phaseJeu(Jeu* jeu) {
+    for (int i = 0; i < 4; i++) {
+        jeu->joueurActuel = &jeu->joueurs[(jeu->donneur + i) % 4];
+        printf("Au tour de %s de jouer.\n", jeu->joueurActuel->nom);
+        int choix;
 
-// Quand monter à l'atout:
-// -l'entame est un atout
-// -quand un adversaire coupe avec un atout
+        if (jeu->joueurActuel->isBot) {
+            choix = jouerCarteHumain(jeu, jeu->joueurActuel);
+        } else {
+            choix = jouerCarteBot(jeu, jeu->joueurActuel);
+        }
+
+        Carte* carteJouee = jeu->joueurActuel->carte[choix];
+
+        char carteStr[16];
+        carteToString(*carteJouee, carteStr);
+
+        printf("%s a joué : %s", jeu->joueurActuel->nom, carteStr);
+
+        bool isAtout = carteJouee->couleur == jeu->enchere.contrat.atout;
+
+        if (i == 0) // Si c'est le premier joueur
+            jeu->entame = carteJouee;
+
+        if (isAtout)
+            jeu->atoutPose = carteJouee;
+
+        poserCarte(&jeu->joueurActuel->carte[choix], jeu);
+
+        jeu->carteMaitre = carteGagnante(jeu);
+    }
+
+    Equipe* gagnant = poseurCarte(jeu, jeu->carteMaitre)->equipe;
+}
+
+
+
+Joueur* poseurCarte(Jeu* jeu, int n) {
+    return &jeu->joueurs[(jeu->donneur + n - 1) % 4];
+}
+
+int carteGagnante(Jeu* jeu) {
+    int max = 0;
+    int gagnant = 0;
+
+    for (int i = 0; i < jeu->nbCartes; i++) {
+        int points = pointsCarte(*jeu->pile[i], jeu->enchere.contrat);
+        bool isAtout = jeu->pile[i]->couleur == jeu->enchere.contrat.atout;
+
+        if (jeu->atoutPose != NULL) {
+        // Si un atout a été posé
+            if (points > max && isAtout) {
+            // Et si cette carte est atout qui est supérieure au max
+                max = points;
+                gagnant = i;
+            }
+        } else {
+            // Sinon, si il n'y a pas d'atout
+            if (points > max) {
+                max = points;
+                gagnant = i;
+            }
+        }
+    }
+
+    return gagnant;
+}

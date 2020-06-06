@@ -18,6 +18,15 @@ Jeu creerJeu();
 
 void resetPile(Jeu* jeu);
 
-bool carteValide(Jeu* jeu, Carte carte);
+bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte);
+
+// Retourne le joueur qui a posé la carte n dans la pile du jeu
+// (n = [0,3])
+Joueur* poseurCarte(Jeu* jeu, int n);
+
+int carteGagnante(Jeu* jeu);
+
+int jouerCarteHumain(Jeu* jeu, Joueur* joueur);
+int jouerCarteBot(Jeu* jeu, Joueur* joueur);
 
 #endif

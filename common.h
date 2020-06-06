@@ -76,7 +76,7 @@ struct NodeCarte {
 };
 
 struct EtatEnchere {
-    Contrat dernierContrat;
+    Contrat contrat;
 
     bool encheri;
     int nbTour;
@@ -90,14 +90,25 @@ struct EtatEnchere {
 };
 
 struct Jeu {
-    struct EtatEnchere derniereEnchere;
+    struct EtatEnchere enchere;
 
     Carte* pile[4];
+
+    // Carte de l'entame
     Carte* entame;
 
+    // Carte de l'atout au cours du pli (celle qui a coupé)
+    Carte* atoutPose;
+
+    // Position de la carte la plus forte posée pour le moment
+    int carteMaitre;
+
+    // Nombre de cartes sur le jeu (nombres d'éléments dans pile[4])
     int nbCartes;
 
+    // Position du joueur dans joueurs[] qui commence le pli ou l'enchère
     int donneur;
+
     Joueur* joueurs;
     Joueur* joueurActuel;
     

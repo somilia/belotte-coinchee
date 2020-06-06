@@ -30,6 +30,7 @@ Carte creerCarte(Couleur c, Valeur v) {
     return carte;
 }
 
+
 int poserCarte(Carte **source, Jeu *jeu) {
     if (source == NULL) {
         return POSER_ECHEC;

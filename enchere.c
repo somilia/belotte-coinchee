@@ -35,7 +35,7 @@ void afficherContrat(Contrat c) {
 enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
     if (etat->encheri || etat->hasCapot) {
         printf("--------- Contrat actuel ---------\n");
-        afficherContrat(etat->dernierContrat);
+        afficherContrat(etat->contrat);
         printf("----------------------------------\n");
     }
 
@@ -76,6 +76,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
             int val;
             printf("Vous proposez un contrat :\n");
 
+            // Saisie du contrat (valeur + atout)
             while (1) {
                 printf("Valeur : ");
 
@@ -90,7 +91,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
                     if (etat->encheri) {
                         // SI jamais un contrat existe déjà, càd que quelqu'un a déjà enchéri
                         // on change la valeur minimale à la valeur du dernier contrat
-                        minVal = etat->dernierContrat.valeur;
+                        minVal = etat->contrat.valeur;
                     }
 
                     if (val >= minVal) {
@@ -123,7 +124,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
 
             // On crée un contrat que l'on assigne à l'état de l'enchère
             Contrat contrat = creerContrat(val, (Atout)atout, joueur->equipe, false);
-            etat->dernierContrat = contrat;
+            etat->contrat = contrat;
             break;
         }
         case 2:
@@ -136,6 +137,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
 
             int atout;
 
+            // Saisie du contrat (seulement atout)
             do {
                 printf("Atout : ");
                 if (!scanf("%d", &atout)) {
@@ -147,7 +149,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
 
             // On crée un contrat fixe que l'on assigne à l'état de l'enchère
             Contrat contrat = creerContrat(250, (Atout)atout, joueur->equipe, true);
-            etat->dernierContrat = contrat;
+            etat->contrat = contrat;
             break;
         case 3:
             printf("Vous coinchez !\n");
@@ -230,7 +232,7 @@ void phaseEnchere(Jeu* jeu) {
         tourEnchere++;
     }
 
-    jeu->derniereEnchere = etat;
+    jeu->enchere = etat;
 }
 
 bool choixEnchereValide(enum ChoixEnchere choix, struct EtatEnchere etat, Joueur* joueur) {
@@ -261,7 +263,7 @@ bool choixEnchereValide(enum ChoixEnchere choix, struct EtatEnchere etat, Joueur
             return true;
 
         case COINCHER:
-            if (etat.coinche || !etat.encheri || etat.dernierContrat.equipe == joueur->equipe) {
+            if (etat.coinche || !etat.encheri || etat.contrat.equipe == joueur->equipe) {
                 // Si quelqu'un a déjà coinché
                 // Ou si personne n'a enchéri (= aucun contrat)
                 // ou si le dernier contrat appartient à l'équipe du joueur actuel
