@@ -3,12 +3,25 @@
 #include "carte.h"
 #include "enchere.h"
 
-Jeu creerJeu(Joueur joueurs[4]) {
+Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2], Carte paquet[TAILLE_PAQUET]) {
     Jeu j;
     j.joueurs = joueurs;
-    j.nbCartes = 0;
-    j.nbTours = 0;
-    j.donneur = 0;
+    j.nbPli = 0;
+    j.entameur = 0;
+    j.donneur = 1;
+
+    j.equipes = equipes;
+    
+    resetPile(&j);
+
+    j.paquet = paquet;
+
+    j.carteMaitre = 0;
+    j.joueurActuel = &joueurs[j.entameur];
+
+    j.atoutPose = NULL;
+    j.entame = NULL;
+
 
     return j;
 }
@@ -18,6 +31,22 @@ void resetPile(Jeu* jeu) {
         jeu->pile[i] = NULL;
         jeu->nbCartes = 0;
     }
+}
+
+void nouveauPli(Jeu* jeu) {
+    jeu->atoutPose = NULL;
+    resetPile(jeu);
+
+    jeu->carteMaitre = 0;
+    jeu->entame = NULL;
+    jeu->atoutPose = NULL;
+
+    if (jeu->nbPli == 0)
+        jeu->entameur = (jeu->donneur -  1) % 4;
+    else
+        jeu->entameur = poseurCarte(jeu, carteGagnante(jeu))->id;
+
+    jeu->joueurActuel = &jeu->joueurs[jeu->entameur];
 }
 
 void afficherJeu(Jeu* jeu) {
@@ -48,37 +77,52 @@ void afficherJeu(Jeu* jeu) {
 
 bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
     Contrat contrat = jeu->enchere.contrat;
-    Joueur partenaire = jeu->
+    Joueur* maitre = poseurCarte(jeu, jeu->carteMaitre);
 
-    if (jeu->atoutPose == NULL && carte.couleur == jeu->entame->couleur) {
+    if (jeu->entame == NULL) {
         return true;
     }
 
-    if (jeu->atoutPose == NULL && carte.couleur == contrat.atout) {
-        return true;
+    if (jeu->atoutPose == NULL && jeu->entame != NULL) {
+        if (carte.couleur == jeu->entame->couleur)
+            return true;
     }
+
+    if (jeu->atoutPose == NULL && isAtout(jeu, carte))
+        return true;
+
 
     if (jeu->atoutPose
-        && carte.couleur == contrat.atout
-        && pointsCarte(carte, contrat) > pointsCarte(*jeu->atoutPose, contrat)
-    ) {
+        && isAtout(jeu, carte)
+        && pointsCarte(carte, contrat) > pointsCarte(*jeu->atoutPose, contrat))
         return true;
-    }
 
-    if (carte.couleur != jeu->entame->couleur &&)
+    // Si le partenaire est le maître de l'équipe on peut jouer n'importe quelle carte
+    if (isMemeEquipe(joueur, maitre))
+        return true;
 
-
+    if (jeu->entame != NULL)
+    if (joueur->possedeCouleur[jeu->entame->couleur] == 0
+            && !isMemeEquipe(joueur, maitre)
+            && isAtout(jeu, carte))
+        return true;
+    
+    
 
     return false;
 }
 
-void phaseJeu(Jeu* jeu) {
+void phasePli(Jeu* jeu) {
+
+    nouveauPli(jeu);
+    bool isDernierPli = jeu->nbPli == 7;
+
     for (int i = 0; i < 4; i++) {
-        jeu->joueurActuel = &jeu->joueurs[(jeu->donneur + i) % 4];
+        jeu->joueurActuel = &jeu->joueurs[(jeu->entameur + i) % 4];
         printf("Au tour de %s de jouer.\n", jeu->joueurActuel->nom);
         int choix;
 
-        if (jeu->joueurActuel->isBot) {
+        if (!jeu->joueurActuel->isBot) {
             choix = jouerCarteHumain(jeu, jeu->joueurActuel);
         } else {
             choix = jouerCarteBot(jeu, jeu->joueurActuel);
@@ -89,7 +133,7 @@ void phaseJeu(Jeu* jeu) {
         char carteStr[16];
         carteToString(*carteJouee, carteStr);
 
-        printf("%s a joué : %s", jeu->joueurActuel->nom, carteStr);
+        printf("%s a joué : %s\n", jeu->joueurActuel->nom, carteStr);
 
         bool isAtout = carteJouee->couleur == jeu->enchere.contrat.atout;
 
@@ -99,18 +143,95 @@ void phaseJeu(Jeu* jeu) {
         if (isAtout)
             jeu->atoutPose = carteJouee;
 
-        poserCarte(&jeu->joueurActuel->carte[choix], jeu);
+        poserCarte(jeu->joueurActuel, choix, jeu);
 
         jeu->carteMaitre = carteGagnante(jeu);
     }
 
     Equipe* gagnant = poseurCarte(jeu, jeu->carteMaitre)->equipe;
+    int scorePli = pointsPile(jeu);
+
+    gagnant->score += scorePli;
+    printf("L'équipe %d remporte le pli (+%d pts)\n", gagnant->id, scorePli);
+}
+
+int pointsPile(Jeu *jeu) {
+    int sum = 0;
+    for (int i = 0; i < jeu->nbCartes; i++) {
+        if (jeu->pile[i] != NULL) {
+            sum += pointsCarte(*jeu->pile[i], jeu->enchere.contrat);
+        }
+    }
+
+    return sum;
 }
 
 
+void phaseRound(Jeu* jeu) {
+    distribuer(jeu->joueurs, jeu->paquet);
+    jeu->nbPli = 0;
+
+    phaseEnchere(jeu);
+    for (int i = 0; i < 8; i++) {
+        phasePli(jeu);
+        jeu->nbPli++;
+    }
+};
+
+int jouerCarteHumain(Jeu* jeu, Joueur* joueur){
+    printf("Choisissez une carte :\n");
+
+    bool choixPossible[8];
+
+    for (int i = 0; i < 8; i++) {
+        Carte carte = *(joueur->carte[i]);
+        // printf("prout\n");
+        char carteStr[16];
+        carteToString(carte, carteStr);
+
+        bool isValid = carteValide(jeu, joueur, carte);
+        choixPossible[i] = isValid;
+
+        if (isValid) {
+            printf("%d. %s\n", i, carteStr);
+        } else {
+            printf("-. %s (pas jouable)\n", carteStr);
+        }
+    }
+
+    int choix;
+
+    bool ok = false;
+    do {
+        printf("Carte : ");
+        if(!scanf("%d", &choix)) {
+            printf("Vous n'avez rien entré\n");
+        }
+
+        if (choixPossible[choix]) {
+            ok = true;
+        } else {
+            printf("Carte non valide...\n");
+        }
+
+    } while(!ok);
+
+    return choix;
+}
+
+int jouerCarteBot(Jeu* jeu, Joueur* joueur){}
+
 
 Joueur* poseurCarte(Jeu* jeu, int n) {
-    return &jeu->joueurs[(jeu->donneur + n - 1) % 4];
+    return &jeu->joueurs[(jeu->entameur + n - 1) % 4];
+}
+
+bool isMemeEquipe(Joueur* j1, Joueur* j2) {
+    return j1->equipe == j2->equipe;
+}
+
+bool isAtout(Jeu* jeu, Carte c) {
+    return jeu->enchere.contrat.atout == c.couleur;
 }
 
 int carteGagnante(Jeu* jeu) {

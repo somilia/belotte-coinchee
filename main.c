@@ -31,19 +31,20 @@ int main() {
 
     distribuer(joueurs, paquet);
 
-    // afficherJoueur(joueurs[0]);
+    afficherJoueur(joueurs[0]);
 
-    Jeu jeu = creerJeu(joueurs);
+    Jeu jeu = creerJeu(joueurs, equipe, paquet);
 
     // printf("\n\n");
-    // poserCarte(&joueurs[0].carte[0], &jeu);
+    // poserCarte(&joueurs[0], 0, &jeu);
+    // poserCarte(&joueurs[0], 2, &jeu);
     // poserCarte(&joueurs[0].carte[1], &jeu);
     // poserCarte(&joueurs[0].carte[1], &jeu);
     // afficherJoueur(joueurs[0]);
     // printf("\n\n");
     // afficherJeu(&jeu);
 
-    phaseEnchere(&jeu);
+    phaseRound(&jeu);
 
         
     // contrat(&joueur[0], tabcarte[0]);

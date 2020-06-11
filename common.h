@@ -16,6 +16,8 @@ typedef struct Contrat Contrat;
 
 typedef struct Jeu Jeu;
 
+#define TAILLE_PAQUET 32
+
 enum ChoixEnchere {
     PASSER,
     ENCHERIR,
@@ -56,6 +58,10 @@ struct Joueur {
     Equipe* equipe;
     bool isBot;
     Carte* carte[8];
+
+    // Nombre de couleurs que possède le joueur en main
+    // {Trefle, Carreau, Coeur, Pique}
+    int possedeCouleur[4];
 };
 
 struct Equipe {
@@ -92,6 +98,8 @@ struct EtatEnchere {
 struct Jeu {
     struct EtatEnchere enchere;
 
+    Carte* paquet;
+
     Carte* pile[4];
 
     // Carte de l'entame
@@ -106,13 +114,19 @@ struct Jeu {
     // Nombre de cartes sur le jeu (nombres d'éléments dans pile[4])
     int nbCartes;
 
-    // Position du joueur dans joueurs[] qui commence le pli ou l'enchère
+    // Indice du joueur qui distribue 
     int donneur;
+
+    // Indice du joueur dans joueurs[] qui commence le pli ou l'enchère
+    int entameur;
 
     Joueur* joueurs;
     Joueur* joueurActuel;
+
+    Equipe* equipes;
     
-    int nbTours;
+    int nbPli;
+    int nbRound;
 };
 
 #endif

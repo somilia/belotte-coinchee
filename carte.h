@@ -2,8 +2,7 @@
 #define PROJECTIFB_CARTE_H
 
 #include "joueur.h"
-
-#define TAILLE_PAQUET 32
+#include "common.h"
 
 static inline const char* couleurToString(Couleur c) {
     static const char* str_couleur[] = {"Trefle", "Carreau", "Coeur", "Pique"};
@@ -19,7 +18,8 @@ static inline const char* valeurToString(Valeur v) {
 Carte creerCarte(Couleur c, Valeur v);
 void carteToString(Carte carte, char* output);
 
-int poserCarte(Carte** source, Jeu* jeu);
+// Pose la carte idCarte du paquet de carte du joueur
+int poserCarte(Joueur* joueur, int idCarte, Jeu* jeu);
 
 void initPaquetCarte(Carte paquet[]);
 
@@ -31,6 +31,7 @@ void afficherCarte(Carte carte);
 void afficherPaquet(Carte** paquet, int nbCartes);
 
 void permute(Carte* carte1, Carte* carte2);
+
 void melanger(Carte* paquet, int nbMelange);
 
 void distribuer(Joueur joueurs[4], Carte paquet[TAILLE_PAQUET]);

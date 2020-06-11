@@ -31,14 +31,17 @@ Carte creerCarte(Couleur c, Valeur v) {
 }
 
 
-int poserCarte(Carte **source, Jeu *jeu) {
-    if (source == NULL) {
-        return POSER_ECHEC;
-    }
+int poserCarte(Joueur* j, int idCarte, Jeu *jeu) {
+    Carte **source = &j->carte[idCarte];
 
-    if (jeu->nbCartes >= 4) {
+    if (source == NULL)
+        return POSER_ECHEC;
+
+    if (jeu->nbCartes >= 4)
         return POSER_PLEIN;
-    }
+
+    // On retire une couleur au compteur de couleurs
+    j->possedeCouleur[(*source)->couleur]--;
 
     jeu->pile[jeu->nbCartes] = *source;
     *source = NULL;
@@ -97,11 +100,16 @@ void melanger(Carte *paquet, int nbMelange) {
 }
 
 void distribuer(Joueur joueurs[4], Carte paquet[TAILLE_PAQUET]) {
-    int counter = 0;
+    int cnt = 0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 8; j++) {
-            joueurs[i].carte[j] = &paquet[counter];
-            counter++;
+            Carte* c = &paquet[cnt];
+            joueurs[i].carte[j] = c;
+
+            // Augmente le nombre de couleurs
+            joueurs[i].possedeCouleur[c->couleur]++;
+
+            cnt++;
         }
     }
 }
