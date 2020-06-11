@@ -34,6 +34,7 @@ enum Atout {
     SANS_ATOUT = 4,
     TOUT_ATOUT = 5
 };
+
 enum Couleur { TREFLE = 0, CARREAU = 1, COEUR = 2, PIQUE = 3 };
 
 enum Valeur {

@@ -21,8 +21,8 @@ static inline const char* atoutToString(enum Atout a) {
 static const int POINTS_SA[]        = {0, 0, 0,  10, 2,  3, 4, 19};
 static const int POINTS_TA[]        = {0, 0, 9,  5,  13, 2, 3, 6 };
 
-static const int POINTS_ATOUT[]     = {0, 0, 0,  10, 2,  3, 4, 11};
-static const int POINTS_HORS_ATOUT[]= {0, 0, 14, 10, 20, 3, 4, 11};
+static const int POINTS_HORS_ATOUT[]    = {0, 0, 0,  10, 2,  3, 4, 11};
+static const int POINTS_ATOUT[]         = {0, 0, 14, 10, 20, 3, 4, 11};
 
 static inline const char* choixEnchereToString(enum ChoixEnchere c) {
     static const char* choix_encheres[] = {"Passer", "Enchérir", "Capot", "Coincher", "Surcoincher"};

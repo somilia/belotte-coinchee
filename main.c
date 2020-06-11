@@ -29,9 +29,9 @@ int main() {
     joueurs[2] = creerJoueur(2, "Younesse", &equipe[0], false);
     joueurs[3] = creerJoueur(3, "Yacine", &equipe[1], false);
 
-    distribuer(joueurs, paquet);
+    // distribuer(joueurs, paquet);
 
-    afficherJoueur(joueurs[0]);
+    // afficherJoueur(joueurs[0]);
 
     Jeu jeu = creerJeu(joueurs, equipe, paquet);
 
