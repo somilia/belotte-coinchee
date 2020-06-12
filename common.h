@@ -16,6 +16,8 @@ typedef struct Contrat Contrat;
 
 typedef struct Jeu Jeu;
 
+typedef struct Annonce Annonce;
+
 #define TAILLE_PAQUET 32
 
 enum ChoixEnchere {

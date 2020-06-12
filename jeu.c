@@ -103,10 +103,29 @@ void phaseRound(Jeu* jeu) {
 
         jeu->nbPli++;
     }
+
+    Contrat contrat = jeu->enchere.contrat;
+
+    Equipe* equipeContrat = contrat.equipe;
+
+    // Récupère l'autre équipe du jeu
+    Equipe* equipeAutre = &jeu->equipes[(contrat.equipe->id + 1) % 2];
+
+    if (contrat.equipe->score > contrat.valeur) {
+        if (jeu->enchere.surcoinche) {
+            // GERER SURCOINCHE
+        }
+    } else {
+        if (jeu->enchere.coinche) {
+            // GERER COINCHE
+        }
+    }
+
+    if (jeu->equipes[0].score)
+
 };
 
 bool isAtout(Jeu* jeu, Carte c) {
     return jeu->enchere.contrat.atout == c.couleur;
 }
-
 
