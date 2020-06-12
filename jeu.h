@@ -18,6 +18,8 @@ Jeu creerJeu();
 
 void afficherJeu(Jeu* jeu);
 
+void afficherPile(Jeu* jeu);
+
 void resetPile(Jeu* jeu);
 
 bool isMemeEquipe(Joueur* j1, Joueur* j2);

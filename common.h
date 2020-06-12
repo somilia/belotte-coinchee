@@ -123,6 +123,7 @@ struct Jeu {
 
     Joueur* joueurs;
     Joueur* joueurActuel;
+    Joueur* joueurPrincipal;
 
     Equipe* equipes;
     

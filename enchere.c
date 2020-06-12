@@ -94,7 +94,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
                         minVal = etat->contrat.valeur;
                     }
 
-                    if (val >= minVal) {
+                    if (val > minVal) {
                         break;
                     } else {
                         printf("La valeur doit être plus grande que %d\n",

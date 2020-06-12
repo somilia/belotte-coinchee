@@ -1,10 +1,14 @@
+#include "jeu.h"
+
 #include <stdlib.h>
+#include <string.h>
+
 #include "carte.h"
 #include "enchere.h"
 #include "pli.h"
-#include "jeu.h"
 
-Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2], Carte paquet[TAILLE_PAQUET]) {
+Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2],
+             Carte paquet[TAILLE_PAQUET]) {
     Jeu j;
     j.joueurs = joueurs;
     j.nbPli = 0;
@@ -13,7 +17,7 @@ Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2], Carte paquet[TAILLE_PAQUET]) 
     j.donneur = 1;
 
     j.equipes = equipes;
-    
+
     resetPile(&j);
 
     j.paquet = paquet;
@@ -21,9 +25,10 @@ Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2], Carte paquet[TAILLE_PAQUET]) 
     j.carteMaitre = 0;
     j.joueurActuel = &joueurs[j.entameur];
 
+    j.joueurPrincipal = &joueurs[0];
+
     j.atoutPose = NULL;
     j.entame = NULL;
-
 
     return j;
 }
@@ -35,9 +40,39 @@ void resetPile(Jeu* jeu) {
     }
 }
 
-void afficherJeu(Jeu* jeu) {
-    printf("Pile : \n");
-    afficherPaquet(jeu->pile, 4);
+void afficherJeu(Jeu* jeu) { afficherPaquet(jeu->pile, 4); }
+
+void afficherPile(Jeu* jeu) {
+    printf("Pile : %d/4\n", jeu->nbCartes);
+    for (int i = 0; i < 4; i++) {
+        if (jeu->pile[i] != NULL) {
+            Carte carte = *(jeu->pile[i]);
+
+            char carteStr[16];
+            carteToString(carte, carteStr);
+
+            Joueur* joueur = poseurCarte(jeu, i);
+
+            char indicateurEquipe[20] = "";
+
+            if (joueur == jeu->joueurPrincipal) {
+                strcpy(indicateurEquipe, "(vous)");
+            } else if (isMemeEquipe(jeu->joueurPrincipal, joueur)) {
+                strcpy(indicateurEquipe, "(coéquipier)");
+            }
+
+            printf("%d. %s%s %s\t(%d pts) <- %s %s\n", i, carteStr,
+                   isAtout(jeu, carte) ? "*" : "", // Afiche un * si atout
+                   jeu->carteMaitre == i? "+":"", // Affiche un + si maître
+                   pointsCarte(carte, jeu->enchere.contrat),
+                   joueur->nom,
+                   indicateurEquipe
+                );
+
+        } else {
+            printf("-. ---\n");
+        }
+    }
 }
 
 void phaseRound(Jeu* jeu) {
@@ -55,13 +90,17 @@ void phaseRound(Jeu* jeu) {
         phaseEnchere(jeu);
 
         nbRetry++;
-    } while(!jeu->enchere.encheri);
+    } while (!jeu->enchere.encheri);
 
     for (int i = 0; i < 8; i++) {
-        printf("------------ Contrat ------------\n");
+        printf("\n------------ Contrat ------------\n");
         afficherContrat(jeu->enchere.contrat);
         printf("---------------------------------\n");
         phasePli(jeu);
+
+        printf("Equipe %d : Score = %d\n", jeu->equipes[0].id, jeu->equipes[0].score);
+        printf("Equipe %d : Score = %d\n", jeu->equipes[1].id, jeu->equipes[1].score);
+
         jeu->nbPli++;
     }
 };
@@ -69,3 +108,5 @@ void phaseRound(Jeu* jeu) {
 bool isAtout(Jeu* jeu, Carte c) {
     return jeu->enchere.contrat.atout == c.couleur;
 }
+
+
