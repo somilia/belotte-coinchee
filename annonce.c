@@ -21,7 +21,27 @@ Annonce hasAnnonce(Jeu* jeu, Joueur* joueur) {
 }
 
 int scoreAnnonce(Annonce annonce) {
+    
+    switch (annonce.nom) {
+        case RIEN:
+            return 0;
+        case CENT:
+            return 100;
+        case CINQUANTE:
+            return 50;
+        case TIERCE:
+            return 20;
+        case BELOTE:
+            return 20;
+    }
 
+    if (annonce.nom == CARRE) {
+        int valeurs[6] = {0, 0, 150, 100, 200, 100, 100};
+
+        return valeurs[annonce.valeur];
+    }
+
+    return 0;
 }
 
 Annonce annonce_carre(Joueur* joueur) {
@@ -31,7 +51,7 @@ Annonce annonce_carre(Joueur* joueur) {
         Valeur valeur = joueur->carte[i]->valeur;
         vals[valeur]++;
 
-        if (vals[valeur] == 4 && valeur > 1) {  // On saute les valeurs 7 et 8
+        if (vals[valeur] == 4) {  // On saute les valeurs 7 et 8
             annonce.nom = CARRE;
             annonce.valeur = valeur;
         }
@@ -108,7 +128,7 @@ Annonce annonce_suite(Joueur* joueur) {
     return annonce;
 }
 
-Annonce annonce_belote(Jeu* jeu, Joueur *joueur) {
+Annonce hasBelote(Jeu* jeu, Joueur *joueur) {
     Contrat contrat = jeu->enchere.contrat;
 
     bool hasDame = false;

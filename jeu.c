@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "common.h"
 #include "carte.h"
 #include "enchere.h"
 #include "pli.h"
+#include "annonce.h"
 
 Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2],
              Carte paquet[TAILLE_PAQUET]) {
@@ -79,6 +81,9 @@ void phaseRound(Jeu* jeu) {
     jeu->nbPli = 0;
 
     int nbRetry = 0;
+    
+    jeu->equipes[0].scoreRound = 0;
+    jeu->equipes[1].scoreRound = 0;
 
     do {
         if (nbRetry > 0) {
@@ -92,38 +97,60 @@ void phaseRound(Jeu* jeu) {
         nbRetry++;
     } while (!jeu->enchere.encheri);
 
+
+    // Phase calcul d'annonce et de belote
+    for (int i = 0; i < 4; i++) {
+        jeu->joueurs[i].belote = hasBelote(jeu, &jeu->joueurs[i]).nom == BELOTE;
+        jeu->joueurs[i].annonce = hasAnnonce(jeu, &jeu->joueurs[i]);
+    }
+
     for (int i = 0; i < 8; i++) {
         printf("\n------------ Contrat ------------\n");
         afficherContrat(jeu->enchere.contrat);
         printf("---------------------------------\n");
         phasePli(jeu);
 
-        printf("Equipe %d : Score = %d\n", jeu->equipes[0].id, jeu->equipes[0].score);
-        printf("Equipe %d : Score = %d\n", jeu->equipes[1].id, jeu->equipes[1].score);
+        printf("Equipe %d : Round = %d pts (Total = %d pts)\n", jeu->equipes[0].id, jeu->equipes[0].scoreRound, jeu->equipes[0].score);
+        printf("Equipe %d : Round = %d pts (Total = %d pts)\n", jeu->equipes[1].id, jeu->equipes[1].scoreRound, jeu->equipes[1].score);
 
         jeu->nbPli++;
     }
 
+    calculerScoreDonne(jeu);
+
+}
+
+void calculerScoreDonne(Jeu *jeu) {
     Contrat contrat = jeu->enchere.contrat;
 
-    Equipe* equipeContrat = contrat.equipe;
+    // L'équipe qui a le contrat
+    Equipe* preneurs = contrat.equipe;
+    // L'équipe qui n'a pas le contrat (l'autre)
+    Equipe* defenseurs = &jeu->equipes[(contrat.equipe->id + 1) % 2];
 
-    // Récupère l'autre équipe du jeu
-    Equipe* equipeAutre = &jeu->equipes[(contrat.equipe->id + 1) % 2];
+    int valeurAnnonces[2] = {0, 0};
 
-    if (contrat.equipe->score > contrat.valeur) {
+    for (int i = 0; i < 4; i++) {
+        valeurAnnonces[jeu->joueurs[i].equipe->id] += scoreAnnonce(jeu->joueurs[i].annonce);
+    }
+
+    if (contrat.equipe->scoreRound > contrat.valeur && contrat.equipe->scoreRound > defenseurs->scoreRound) {
         if (jeu->enchere.surcoinche) {
-            // GERER SURCOINCHE
+            preneurs->score += (contrat.valeur + 160) * 4;
+        } else if (jeu->enchere.coinche) {
+            preneurs->score += (contrat.valeur + 160) * 2;
+
+        } else {    // Aucune coinche
+            preneurs->score += contrat.valeur + preneurs->scoreRound;
+
+            defenseurs->score += defenseurs->scoreRound;
         }
     } else {
         if (jeu->enchere.coinche) {
             // GERER COINCHE
         }
     }
-
-    if (jeu->equipes[0].score)
-
-};
+}
 
 bool isAtout(Jeu* jeu, Carte c) {
     return jeu->enchere.contrat.atout == c.couleur;

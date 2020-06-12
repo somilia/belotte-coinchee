@@ -198,7 +198,7 @@ void phasePli(Jeu* jeu) {
     char carteStr[16];
     carteToString(*jeu->pile[jeu->carteMaitre], carteStr);
 
-    equipeGagnante->score += scorePli;
+    equipeGagnante->scoreRound += scorePli;
 
     printf("%s remporte le pli (équipe %d) avec \"%s\" +%d pts\n", gagnant->nom,
            equipeGagnante->id, carteStr, scorePli);

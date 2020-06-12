@@ -50,6 +50,13 @@ enum Valeur {
     AS = 7,
 };
 
+enum NomAnnonce { CARRE, CENT, CINQUANTE, TIERCE, BELOTE, RIEN };
+
+struct Annonce {
+    enum NomAnnonce nom;
+    Valeur valeur;  // Pour le carré seulement
+};
+
 struct Carte {
     Couleur couleur;
     Valeur valeur;
@@ -62,6 +69,9 @@ struct Joueur {
     bool isBot;
     Carte* carte[8];
 
+    Annonce annonce;
+    bool belote;
+
     // Nombre de couleurs que possède le joueur en main
     // {Trefle, Carreau, Coeur, Pique}
     int possedeCouleur[4];
@@ -70,6 +80,7 @@ struct Joueur {
 struct Equipe {
     int id;
     int score;
+    int scoreRound;
 };
 struct Contrat {
     int valeur;
