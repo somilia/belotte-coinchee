@@ -70,7 +70,7 @@ struct Joueur {
     Carte* carte[8];
 
     Annonce annonce;
-    bool belote;
+    Annonce belote;
 
     // Nombre de couleurs que possède le joueur en main
     // {Trefle, Carreau, Coeur, Pique}
@@ -139,6 +139,8 @@ struct Jeu {
     Joueur* joueurPrincipal;
 
     Equipe* equipes;
+
+    int pointsObjectif; // Points qu'il faut atteindre pour finir le jeu
     
     int nbPli;
     int nbRound;

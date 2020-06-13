@@ -48,4 +48,6 @@ enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etatEnchere);
 // Permet de dire si un choix est valable en fonction de l'état de l'enchère.
 bool choixEnchereValide(enum ChoixEnchere choix, struct EtatEnchere etat, Joueur* joueur);
 
+void afficherAnnonceEnchere(Joueur joueur, struct EtatEnchere etat, enum ChoixEnchere choix);
+
 #endif //PROJECTIFB_MENUENCHERE_H

@@ -22,7 +22,6 @@ Joueur creerJoueur(int id, char* nom, Equipe* equipe, bool isBot) {
         j.possedeCouleur[i] = 0;
     }
 
-
     return j;
 }
 

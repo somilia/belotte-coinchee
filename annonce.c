@@ -36,7 +36,7 @@ int scoreAnnonce(Annonce annonce) {
     }
 
     if (annonce.nom == CARRE) {
-        int valeurs[6] = {0, 0, 150, 100, 200, 100, 100};
+        int valeurs[8] = {0, 0, 150, 100, 200, 100, 100, 100};
 
         return valeurs[annonce.valeur];
     }
@@ -68,7 +68,7 @@ int comparateurCarte(const void* carte1, const void* carte2) {
 }
 
 Annonce annonce_suite(Joueur* joueur) {
-    Carte copie[8] = NULL;
+    Carte copie[8];
 
     // On crée une copie de la main du joueur pour pas la modifier dans notre tri
     memcpy(copie, joueur->carte, sizeof(Carte) * 8);

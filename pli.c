@@ -136,7 +136,8 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
     }
 
     printf("(FIN)\t");
-    return false;
+    // return false;
+    return true;
 }
 
 bool hasMeilleurCarte(Contrat contrat, Joueur* joueur, Carte carte) {
@@ -222,6 +223,7 @@ int jouerCarteHumain(Jeu* jeu, Joueur* joueur) {
 
     Contrat contrat = jeu->enchere.contrat;
 
+    // Affichage de la main :
     for (int i = 0; i < 8; i++) {
         if (joueur->carte[i] != NULL) {
             Carte carte = *(joueur->carte[i]);
@@ -253,9 +255,10 @@ int jouerCarteHumain(Jeu* jeu, Joueur* joueur) {
         printf("> ");
         if (!scanf("%d", &choix)) {
             printf("Vous n'avez rien entré\n");
+            continue;
         }
         if (choix >= 0 && choix < 8) {
-            if (choixPossible[choix])
+            if (choixPossible[choix] && joueur->carte[choix] != NULL)
                 ok = true;
             else
                 printf("Entrée non valide.\n");

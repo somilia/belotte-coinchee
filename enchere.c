@@ -152,10 +152,10 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
             etat->contrat = contrat;
             break;
         case 3:
-            printf("Vous coinchez !\n");
+            // printf("Vous coinchez !\n");
             break;
         case 4:
-            printf("Vous surcoinchez !\n");
+            // printf("Vous surcoinchez !\n");
             break;
     }
 
@@ -217,7 +217,7 @@ void phaseEnchere(Jeu* jeu) {
 
         jeu->joueurActuel = &jeu->joueurs[(jeu->donneur + tourEnchere - 1) % 4];
 
-        printf("Au tour de %s d'annoncer.\n\n", jeu->joueurActuel->nom);
+        printf("Au tour de %s d'annoncer.\n", jeu->joueurActuel->nom);
 
         if (jeu->joueurActuel->isBot) {
             choix = enchereBot(jeu->joueurActuel, &etat);
@@ -225,6 +225,7 @@ void phaseEnchere(Jeu* jeu) {
             choix = enchereHumain(jeu->joueurActuel, &etat);
         }
 
+        afficherAnnonceEnchere(*jeu->joueurActuel, etat, choix);
         etatEnchereSuivant(&etat, choix, jeu->joueurActuel);
 
         enCours = etat.passConsecutif != 3 && !etat.surcoinche;
@@ -233,6 +234,27 @@ void phaseEnchere(Jeu* jeu) {
     }
 
     jeu->enchere = etat;
+}
+
+void afficherAnnonceEnchere(Joueur joueur, struct EtatEnchere etat, enum ChoixEnchere choix) {
+    switch(choix) {
+        case PASSER:
+            printf("%s passe.\n", joueur.nom);
+            break;
+        case ENCHERIR:
+            printf("%s enchéri avec le contrat : ", joueur.nom);
+            afficherContrat(etat.contrat);
+            break;
+        case CAPOT:
+            printf("%s demande le Capot !", joueur.nom);
+            break;
+        case COINCHER:
+            printf("%s coinche !", joueur.nom);
+            break;
+        case SURCOINCHER:
+            printf("%s surcoinche !!", joueur.nom);
+            break;
+    }
 }
 
 bool choixEnchereValide(enum ChoixEnchere choix, struct EtatEnchere etat, Joueur* joueur) {
@@ -284,7 +306,61 @@ bool choixEnchereValide(enum ChoixEnchere choix, struct EtatEnchere etat, Joueur
 }
 
 //3 cartes fortes ->80 pts;     4 cartes fortes -> 120 pts
-enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etatEnchere) {
+enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etat) {
+    // Ce sont les cartes qui donnent des points
+    bool cartesForte[] = {0, 0, 1, 1, 1, 1, 1};
+
+    // Nombre de cartes dans la même couleur considérée comme forte
+    int nbCartesFortes[] = {0, 0, 0, 0};
+
+    int valeursCarteFortes[] = {0, 0, 0, 0};
+
+    for (int i = 0; i < 8; i++) {
+        bool isForte = cartesForte[joueur->carte[i]->valeur];
+        if (isForte) {
+            nbCartesFortes[joueur->carte[i]->couleur]++;
+        }
+    }
+
+    Couleur meilleureCouleur = -1;
+    int maxNb = 0;
+
+    for (Couleur i = TREFLE; i <= PIQUE; i++) {
+        if (nbCartesFortes[i] > maxNb) {
+            maxNb = nbCartesFortes[i];
+            meilleureCouleur = i;
+        }
+    }
+
+    if (choixEnchereValide(ENCHERIR, *etat, joueur) && maxNb >= 3) {
+        int valeurContrat;
+
+        // Si quelqu'un avait déjà enchéri on rajoute 10 ou 30 à la valeur du contrat
+        // Mais si le contrat dépasse 140  on passe
+        if (etat->encheri) {
+            if (etat->contrat.valeur <= 140) {
+                if (maxNb == 3)
+                    valeurContrat = etat->contrat.valeur + 10;
+                else if (maxNb >= 4)
+                    valeurContrat = etat->contrat.valeur + 30;
+            } else {
+                return PASSER;
+            }
+        } else {
+            if (maxNb == 3)
+                valeurContrat = 80;
+            else if (maxNb >= 4)
+                valeurContrat = 120;
+        }
+        
+        Contrat contrat = creerContrat(valeurContrat, (Atout) meilleureCouleur, joueur->equipe, false);
+
+        etat->contrat = contrat;
+
+        return ENCHERIR;
+    }
+
+
     return PASSER;
 }
 

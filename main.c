@@ -4,12 +4,11 @@
 #include <string.h>
 #include <time.h>
 
-#include "common.h"
 #include "carte.h"
-#include "joueur.h"
-
+#include "common.h"
 #include "equipe.h"
 #include "jeu.h"
+#include "joueur.h"
 
 int main() {
     srand(time(NULL));
@@ -25,29 +24,13 @@ int main() {
     equipe[1] = creerEquipe(1);
 
     joueurs[0] = creerJoueur(0, "Somia", &equipe[0], false);
-    joueurs[1] = creerJoueur(1, "Lionel", &equipe[1], false);
-    joueurs[2] = creerJoueur(2, "Younesse", &equipe[0], false);
-    joueurs[3] = creerJoueur(3, "Yacine", &equipe[1], false);
+    joueurs[1] = creerJoueur(1, "Lionel", &equipe[1], true);
+    joueurs[2] = creerJoueur(2, "Younesse", &equipe[0], true);
+    joueurs[3] = creerJoueur(3, "Yacine", &equipe[1], true);
 
-    // distribuer(joueurs, paquet);
+    Jeu jeu = creerJeu(joueurs, equipe, paquet, 1000);
 
-    // afficherJoueur(joueurs[0]);
-
-    Jeu jeu = creerJeu(joueurs, equipe, paquet);
-
-    // printf("\n\n");
-    // poserCarte(&joueurs[0], 0, &jeu);
-    // poserCarte(&joueurs[0], 2, &jeu);
-    // poserCarte(&joueurs[0].carte[1], &jeu);
-    // poserCarte(&joueurs[0].carte[1], &jeu);
-    // afficherJoueur(joueurs[0]);
-    // printf("\n\n");
-    // afficherJeu(&jeu);
-
-    phaseRound(&jeu);
-
-        
-    // contrat(&joueur[0], tabcarte[0]);
+    lancerJeu(&jeu);
 
     /**
 
@@ -66,6 +49,4 @@ int main() {
         switch(choixMenu) {
             case 1:
                 printf("Vous avez choisi de demarrer une partie\n");*/
-
-
-    }
+}

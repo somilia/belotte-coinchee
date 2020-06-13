@@ -14,7 +14,9 @@
 // SURCOINCHÉ : seulement si l'équipe adverse a coinché
 
 
-Jeu creerJeu();
+Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2], Carte paquet[TAILLE_PAQUET], int pointsObjectif);
+
+void lancerJeu(Jeu* jeu);
 
 void afficherJeu(Jeu* jeu);
 
@@ -29,5 +31,7 @@ void phaseRound(Jeu* jeu);
 
 
 bool isAtout(Jeu* jeu, Carte c);
+
+void calculerScoreDonne(Jeu *jeu);
 
 #endif
