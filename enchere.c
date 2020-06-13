@@ -86,7 +86,7 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
 
                 
                 if (val % 10 == 0) { // Il faut que la valeur soit un multiple de 10
-                    int minVal = 80;
+                    int minVal = 79;
 
                     if (etat->encheri) {
                         // SI jamais un contrat existe déjà, càd que quelqu'un a déjà enchéri
@@ -222,13 +222,16 @@ void phaseEnchere(Jeu* jeu) {
         if (jeu->joueurActuel->isBot) {
             choix = enchereBot(jeu->joueurActuel, &etat);
         } else {
+            printf("Votre main :\n");
+            afficherPaquet(jeu->joueurActuel->carte, 8);
+            printf("\n");
             choix = enchereHumain(jeu->joueurActuel, &etat);
         }
 
         afficherAnnonceEnchere(*jeu->joueurActuel, etat, choix);
         etatEnchereSuivant(&etat, choix, jeu->joueurActuel);
 
-        enCours = etat.passConsecutif != 3 && !etat.surcoinche;
+        enCours = etat.passConsecutif != 3 && !etat.surcoinche && !etat.encheri;
 
         tourEnchere++;
     }

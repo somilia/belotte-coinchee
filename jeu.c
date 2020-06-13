@@ -103,7 +103,6 @@ void phaseRound(Jeu* jeu) {
         // Tant que personne n'a enchéri on mélange et redistribue les cartes
         melanger(jeu->paquet, 200);
         distribuer(jeu->joueurs, jeu->paquet);
-        // afficherJoueur(jeu->joueurs[0]);
         phaseEnchere(jeu);
 
         nbRetry++;
@@ -185,31 +184,34 @@ void attribuerScoreDonne(Jeu *jeu) {
         printf("L'équipe %d respecte le contrat (%d > %d)\n", preneurs->id, preneurs->scoreRound, contrat.valeur);
         if (jeu->enchere.surcoinche) {
             printf("L'équipe %d avait coinché mais les preneurs a surcoinché. x4 !\n", defenseurs->id);
-            gainsPreneurs += (gainCoinche + belotePreneurs) * 4;
-            gainsDefenseurs += beloteDef;
+            gainsPreneurs += gainCoinche * 4;
+
         } else if (jeu->enchere.coinche) {
             printf("L'équipe %d avait coinché. x2 !\n", defenseurs->id);
-            gainsPreneurs += (gainCoinche + belotePreneurs) * 2;
-            gainsDefenseurs += beloteDef;
+            gainsPreneurs += gainCoinche * 2;
 
         } else {    // Aucune coinche
-            gainsPreneurs += contrat.valeur + preneurs->scoreRound + annoncesPreneurs + belotePreneurs;
-            gainsDefenseurs += defenseurs->scoreRound + annoncesDef + beloteDef;
+            gainsPreneurs += contrat.valeur + preneurs->scoreRound + annoncesPreneurs;
+            gainsDefenseurs += defenseurs->scoreRound + annoncesDef;
+
         }
     } else {
         printf("L'équipe %d ne respecte pas le contrat ou a moins de points que l'équipe adverse !\n", preneurs->id);
         if (jeu->enchere.surcoinche) {
             printf("L'équipe %d avait coinché mais les preneurs ont surcoinché. x4 !\n", defenseurs->id);
-            gainsDefenseurs += (gainCoinche + beloteDef) * 4;
+            gainsDefenseurs += gainCoinche * 4;
         } else if (jeu->enchere.coinche) {
             printf("L'équipe %d avait coinché. x2 !\n", defenseurs->id);
-            gainsDefenseurs += (gainCoinche + beloteDef) * 2;
+            gainsDefenseurs += gainCoinche * 2;
         } else {    // Aucune coinche
-            gainsDefenseurs += (gainCoinche + belotePreneurs);
+            gainsDefenseurs += gainCoinche;
         }
-
-        gainsPreneurs += belotePreneurs;
     }
+
+    // Tout le monde gagne la belote
+    gainsPreneurs += belotePreneurs;
+    gainsDefenseurs += beloteDef;
+
 
     preneurs->score += gainsPreneurs;
     defenseurs->score += gainsDefenseurs;
@@ -222,3 +224,42 @@ bool isAtout(Jeu* jeu, Carte c) {
     return jeu->enchere.contrat.atout == c.couleur;
 }
 
+// Utilisé pour facilement trier une liste de carte en fonction de leur valeur en points
+struct _CompareEntry {
+    int indiceCarte;
+    int nbPoints;
+};
+
+int comparateurPointsCarte(const void* carte1, const void* carte2) {
+    struct _CompareEntry a = *(struct _CompareEntry*) carte1;
+    struct _CompareEntry b = *(struct _CompareEntry*) carte2;
+
+    return (int) (a.nbPoints - b.nbPoints);
+}
+
+int trierCarteParPoints(Contrat contrat, Carte* cartes[], int triOutput[], int nbCartes) {
+    struct _CompareEntry *entries = (struct _CompareEntry*)malloc(sizeof(struct _CompareEntry) * nbCartes);
+
+    int nbCartesReel = 0;
+    for (int i = 0; i < nbCartes; i++) {
+        if (cartes[i] != NULL) {
+            struct _CompareEntry entry = {.indiceCarte = i, .nbPoints = pointsCarte(*cartes[i], contrat)};
+            entries[nbCartesReel] = entry;
+            nbCartesReel++;
+        }
+    }
+
+    qsort(entries, nbCartesReel, sizeof(struct _CompareEntry), comparateurPointsCarte);
+
+    for (int i = 0; i < nbCartesReel; i++) {
+        triOutput[i] = entries[i].indiceCarte;
+    }
+
+    for (int i = nbCartesReel; i < nbCartes; i++) {
+        triOutput[i] = -1;
+    }
+
+    free(entries);
+
+    return nbCartesReel;
+}

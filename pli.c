@@ -23,31 +23,6 @@ void nouveauPli(Jeu* jeu) {
     jeu->joueurActuel = &jeu->joueurs[jeu->entameur];
 }
 
-// Défausse = le joueur peut poser toutes ses cartes :
-//      - Le joueur ne possède pas la carte de l'entame et ne possède aucun
-//      atout (et son partenaire n'a pas joué)
-//      - Le joueur ne possède pas la carte de l'entame et son partenaire tient
-//      le pli (mais il peut posséder atout quand même)
-//      - L'adversaire a coupé (avec un atout), et on ne possède pas d'atouts
-
-// On doit jouer atout plus fort si :
-//      - La couleur de l'entame est celle de l'atout
-//      - Un adversaire a coupé avec un atout -> on doit jouer plus fort si on
-//      peut (sinon on doit jouer un atout moins fort)
-
-// On doit jouer un atout moins fort si :
-//      - Un adversaire a coupé avec un atout et qu'on n'a pas d'atout plus fort
-// On peut jouer un atout moins fort si :
-//      - Le partenaire a coupé et est maître et que le joueur n'a plus que des
-//      atout
-
-// On peut jouer une carte si :
-//      - Elle est de la couleur de l'entame
-//      - Si c'est un atout et que personne n'a coupé
-//      - Si on est défaussé
-//      - Si la couleur de l'entame est celle de l'atout et que la carte est
-//      plus forte
-//
 bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
     Contrat contrat = jeu->enchere.contrat;
     Joueur* maitre = poseurCarte(jeu, jeu->carteMaitre);
@@ -92,14 +67,11 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
     }
 
     if (atoutPose) {
-        bool isMeilleurAtout =
-            pointsCarte(carte, contrat) > pointsCarte(*jeu->atoutPose, contrat) && isAtout;
+        bool isMeilleurAtout = pointsCarte(carte, contrat) >
+                                   pointsCarte(*jeu->atoutPose, contrat) &&
+                               isAtout;
         bool hasMeilleurAtout =
             hasMeilleurCarte(contrat, joueur, *jeu->atoutPose);
-
-        // printf("hasMeilleurAtout %d ", hasMeilleurAtout);
-        // printf("isMeilleurAtout %d ", isMeilleurAtout);
-        // printf("isMemeEquipe %d\n", isMemeEquipe(joueur, maitre));
 
         // 3. Lorsque l’on est conduit à jouer atout, soit parce qu’il s’agit de
         // la couleur demandée à l’entame, soit parce que l’on doit couper, on
@@ -145,24 +117,34 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
     }
 
     printf("(FIN)\t");
-    // return false;
     return false;
 }
 
 bool hasMeilleurCarte(Contrat contrat, Joueur* joueur, Carte carte) {
-    bool carteIsAtout = contrat.atout == carte.couleur;
-    for (int i = 0; i < 8; i++) {
-        if (joueur->carte[i] != NULL) {
-            bool joueurCarteIsAtout = contrat.atout == (*joueur->carte[i]).couleur;
+    return premiereMeilleureCarte(contrat, joueur, carte) >= 0;
+}
 
-            if (pointsCarte(*joueur->carte[i], contrat) >
-                pointsCarte(carte, contrat) && carteIsAtout == joueurCarteIsAtout) {
-                return true;
+int premiereMeilleureCarte(Contrat contrat, Joueur* joueur, Carte carte) {
+    int ordre[8] = {0, 1, 2, 3, 4, 5, 6, 7};
+    return premiereMeilleureCarteOrdre(contrat, joueur, carte, ordre, 8);
+}
+
+int premiereMeilleureCarteOrdre(Contrat contrat, Joueur* joueur, Carte carte,
+                                int ordre[8], int nbCartes) {
+    bool carteIsAtout = contrat.atout == carte.couleur;
+    for (int i = 0; i < nbCartes; i++) {
+        Carte* carteTmp = joueur->carte[ordre[i]];
+        if (carteTmp != NULL) {
+            bool joueurCarteIsAtout = contrat.atout == (*carteTmp).couleur;
+
+            if (pointsCarte(*carteTmp, contrat) > pointsCarte(carte, contrat) &&
+                carteIsAtout == joueurCarteIsAtout) {
+                return ordre[i];
             }
         }
     }
 
-    return false;
+    return NONE;
 }
 
 void phasePli(Jeu* jeu) {
@@ -180,8 +162,7 @@ void phasePli(Jeu* jeu) {
         if (!jeu->joueurActuel->isBot) {
             choix = jouerCarteHumain(jeu, jeu->joueurActuel);
         } else {
-            choix = jouerCarteHumain(jeu, jeu->joueurActuel);
-            // choix = jouerCarteBot(jeu, jeu->joueurActuel);
+            choix = jouerCarteBot(jeu, jeu->joueurActuel);
         }
 
         Carte* carteJouee = jeu->joueurActuel->carte[choix];
@@ -192,17 +173,18 @@ void phasePli(Jeu* jeu) {
         printf("%s a joué : %s\n", jeu->joueurActuel->nom, carteStr);
 
         bool isAtout = carteJouee->couleur == jeu->enchere.contrat.atout;
-        
+
         // Si c'est le premier joueur
         if (i == 0) jeu->entame = carteJouee;
 
         if (isAtout) {
             bool isMeilleurAtout = true;
             if (jeu->atoutPose != NULL)
-                isMeilleurAtout = pointsCarte(*carteJouee, jeu->enchere.contrat) > pointsCarte(*jeu->atoutPose, jeu->enchere.contrat);
-            
-            if (isMeilleurAtout)
-                jeu->atoutPose = carteJouee;
+                isMeilleurAtout =
+                    pointsCarte(*carteJouee, jeu->enchere.contrat) >
+                    pointsCarte(*jeu->atoutPose, jeu->enchere.contrat);
+
+            if (isMeilleurAtout) jeu->atoutPose = carteJouee;
         }
 
         poserCarte(jeu->joueurActuel, choix, jeu);
@@ -289,7 +271,42 @@ int jouerCarteHumain(Jeu* jeu, Joueur* joueur) {
     return choix;
 }
 
-int jouerCarteBot(Jeu* jeu, Joueur* joueur) {}
+int jouerCarteBot(Jeu* jeu, Joueur* joueur) {
+    int tri[8];
+    int choix;
+    int n = trierCarteParPoints(jeu->enchere.contrat, joueur->carte, tri, 8);
+
+    // Si c'est l'entame il pose sa carte la plus faible
+    if (jeu->entame == NULL) {
+        for (int i = 0; i < n; i++) {
+            if (carteValide(jeu, joueur, *joueur->carte[tri[i]])) {
+                return tri[i];
+            }
+        }
+    }
+
+    Carte carteMaitre = *jeu->pile[jeu->carteMaitre];
+
+    int indiceCarte = premiereMeilleureCarteOrdre(jeu->enchere.contrat, joueur,
+                                                  carteMaitre, tri, n);
+
+    if (indiceCarte == NONE) {
+        // Si l’IA n’est pas en mesure de remporter le pli, elle joue sa carte
+        // la plus faible
+        for (int i = 0; i < n; i++) {
+            if (carteValide(jeu, joueur, *joueur->carte[tri[i]])) {
+                choix = tri[i];
+                break;
+            }
+        }
+    } else {
+        // Si l’IA est en mesure de remporter le pli avec une de ses cartes,
+        // elle le fait en posant la carte la plus faible possible
+        choix = indiceCarte;
+    }
+
+    return choix;
+}
 
 Joueur* poseurCarte(Jeu* jeu, int n) {
     return &jeu->joueurs[(jeu->entameur + n) % 4];

@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#define NONE -1
+
 // Réinitialise le jeu pour lancer une nouvelle phase de pli
 void nouveauPli(Jeu* jeu);
 
@@ -29,5 +31,11 @@ int pointsPile(Jeu *jeu);
 
 // Retourne si le joueur possède une meilleure carte que celle en paramètre
 bool hasMeilleurCarte(Contrat contrat, Joueur* joueur, Carte carte);
+
+// Retourne l'indice de la première meilleure carte du joueur trouvée dans
+int premiereMeilleureCarte(Contrat contrat, Joueur* joueur, Carte carte);
+
+// Retourne l'indice de la première meilleure carte trouvée en fonction de l'ordre donné
+int premiereMeilleureCarteOrdre(Contrat contrat, Joueur* joueur, Carte carte, int ordre[8], int nbCartes);
 
 #endif

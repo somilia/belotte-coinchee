@@ -29,9 +29,10 @@ bool isMemeEquipe(Joueur* j1, Joueur* j2);
 // Une donne = quand les 8 plis ont été joués
 void phaseRound(Jeu* jeu);
 
-
 bool isAtout(Jeu* jeu, Carte c);
 
 void attribuerScoreDonne(Jeu *jeu);
+
+int trierCarteParPoints(Contrat contrat, Carte* cartes[], int triOutput[], int nbCartes);
 
 #endif
