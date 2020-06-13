@@ -37,7 +37,6 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
         joueur->possedeCouleur[contrat.atout] == 8 - jeu->nbPli;
 
     if (!entamePosee) {
-        printf("(1)\t");
         return true;
     }
 
@@ -46,7 +45,6 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
 
     // Si on ne possède ni couleur de entame ni atout alors on est défaussé
     if (!hasCouleurEntame && !hasAtout) {
-        printf("(2)\t");
         return true;
     }
 
@@ -55,13 +53,11 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
     // jouer un atout si l'on en possède"
     if (!isMemeEquipe(joueur, maitre) && !hasCouleurEntame && hasAtout &&
         !isAtout) {
-        printf("(3)\t");
         return false;
     }
 
     if (!atoutPose) {
         if (isCouleurEntame || isAtout) {
-            printf("(4)\t");
             return true;
         }
     }
@@ -71,7 +67,7 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
                                    pointsCarte(*jeu->atoutPose, contrat) &&
                                isAtout;
         bool hasMeilleurAtout =
-            hasMeilleurCarte(contrat, joueur, *jeu->atoutPose);
+            hasMeilleurCarte(jeu, joueur, *jeu->atoutPose);
 
         // 3. Lorsque l’on est conduit à jouer atout, soit parce qu’il s’agit de
         // la couleur demandée à l’entame, soit parce que l’on doit couper, on
@@ -79,7 +75,6 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
         // tapis, même si cela est contraire à notre intérêt. Si cela s'avère
         // impossible, on peut jouer un atout plus faible.
         if (isAtout && isMeilleurAtout) {
-            printf("(5)\t");
             return true;
         }
 
@@ -89,12 +84,10 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
         // jouer n'importe quelle carte; on se "défausse". On peut également
         // jouer atout si bon nous semble"
         if (isMemeEquipe(joueur, maitre) && !hasCouleurEntame) {
-            printf("(6)\t");
             return true;
         }
 
         if (!hasMeilleurAtout) {
-            printf("(9)\t");
             return true;
         }
 
@@ -102,7 +95,6 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
         // que des atouts inférieurs au sien, il n’est pas obligatoire d’en
         // jouer un (on dit que l’on « ne pisse pas »), on peut se défausser."
         if (!isMemeEquipe(joueur, maitre) && !hasMeilleurAtout) {
-            printf("(7)\t");
             return true;
         }
 
@@ -111,34 +103,38 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
         // un atout supérieur. C’est le seul cas de figure, plutôt rare, où il
         // est permis de jouer un atout inférieur.
         if (isMemeEquipe(joueur, maitre) && possedeQueAtout) {
-            printf("(8)\t");
             return true;
         }
     }
 
-    printf("(FIN)\t");
     return false;
 }
 
-bool hasMeilleurCarte(Contrat contrat, Joueur* joueur, Carte carte) {
-    return premiereMeilleureCarte(contrat, joueur, carte) >= 0;
+bool hasMeilleurCarte(Jeu* jeu, Joueur* joueur, Carte carte) {
+    return premiereMeilleureCarte(jeu, joueur, carte) >= 0;
 }
 
-int premiereMeilleureCarte(Contrat contrat, Joueur* joueur, Carte carte) {
+int premiereMeilleureCarte(Jeu* jeu, Joueur* joueur, Carte carte) {
     int ordre[8] = {0, 1, 2, 3, 4, 5, 6, 7};
-    return premiereMeilleureCarteOrdre(contrat, joueur, carte, ordre, 8);
+    return premiereMeilleureCarteOrdre(jeu, joueur, carte, ordre, 8);
 }
 
-int premiereMeilleureCarteOrdre(Contrat contrat, Joueur* joueur, Carte carte,
+int premiereMeilleureCarteOrdre(Jeu* jeu, Joueur* joueur, Carte carte,
                                 int ordre[8], int nbCartes) {
+    Contrat contrat = jeu->enchere.contrat;
     bool carteIsAtout = contrat.atout == carte.couleur;
+    bool carteIsEntame = jeu->entame->couleur == carte.couleur;
+
     for (int i = 0; i < nbCartes; i++) {
         Carte* carteTmp = joueur->carte[ordre[i]];
         if (carteTmp != NULL) {
             bool joueurCarteIsAtout = contrat.atout == (*carteTmp).couleur;
+            bool joueurCarteIsEntame =
+                jeu->entame->couleur == (*carteTmp).couleur;
 
             if (pointsCarte(*carteTmp, contrat) > pointsCarte(carte, contrat) &&
-                carteIsAtout == joueurCarteIsAtout) {
+                carteIsAtout == joueurCarteIsAtout &&
+                carteIsEntame == joueurCarteIsEntame) {
                 return ordre[i];
             }
         }
@@ -157,7 +153,7 @@ void phasePli(Jeu* jeu) {
         // afficherJoueur(*jeu->joueurActuel);
         int choix;
 
-        if (i > 0) afficherPile(jeu);
+        afficherPile(jeu);
 
         if (!jeu->joueurActuel->isBot) {
             choix = jouerCarteHumain(jeu, jeu->joueurActuel);
@@ -193,6 +189,8 @@ void phasePli(Jeu* jeu) {
 
         printf("\n");
     }
+    afficherPile(jeu);
+    printf("\n");
 
     Joueur* gagnant = poseurCarte(jeu, jeu->carteMaitre);
     Equipe* equipeGagnante = gagnant->equipe;
@@ -287,7 +285,7 @@ int jouerCarteBot(Jeu* jeu, Joueur* joueur) {
 
     Carte carteMaitre = *jeu->pile[jeu->carteMaitre];
 
-    int indiceCarte = premiereMeilleureCarteOrdre(jeu->enchere.contrat, joueur,
+    int indiceCarte = premiereMeilleureCarteOrdre(jeu, joueur,
                                                   carteMaitre, tri, n);
 
     if (indiceCarte == NONE) {
@@ -319,19 +317,23 @@ int carteGagnante(Jeu* jeu) {
     int gagnant = 0;
 
     for (int i = 0; i < jeu->nbCartes; i++) {
-        int points = pointsCarte(*jeu->pile[i], jeu->enchere.contrat);
-        // bool isAtout = jeu->pile[i]->couleur == jeu->enchere.contrat.atout;
+        Carte carte = *jeu->pile[i];
+        int points = pointsCarte(carte, jeu->enchere.contrat);
+        // bool isAtout =carte->couleur == jeu->enchere.contrat.atout;
 
         if (jeu->atoutPose != NULL) {
             // Si un atout a été posé
-            if (points > max && isAtout(jeu, *jeu->pile[i])) {
+            if (points > max && isAtout(jeu, carte)) {
                 // Et si cette carte est atout qui est supérieure au max
                 max = points;
                 gagnant = i;
             }
         } else {
-            // Sinon, si il n'y a pas d'atout
-            if (points > max) {
+            // Sinon, si il n'y a pas d'atout de posé
+            if (isAtout(jeu, carte)) {
+                // Si un joueur coupe c'est celle ci qui devient la meilleure
+                gagnant = i;
+            } else if (points > max && carte.couleur == jeu->entame->couleur) {
                 max = points;
                 gagnant = i;
             }

@@ -70,7 +70,6 @@ enum ChoixEnchere menuEnchere(struct EtatEnchere* etat, Joueur* joueur) {
 
     switch (choix) {
         case 0:
-            printf("Vous passez..\n");
             break;
         case 1: {
             int val;
@@ -231,7 +230,7 @@ void phaseEnchere(Jeu* jeu) {
         afficherAnnonceEnchere(*jeu->joueurActuel, etat, choix);
         etatEnchereSuivant(&etat, choix, jeu->joueurActuel);
 
-        enCours = etat.passConsecutif != 3 && !etat.surcoinche && !etat.encheri;
+        enCours = etat.passConsecutif != 3 && !etat.surcoinche;
 
         tourEnchere++;
     }

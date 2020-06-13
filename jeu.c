@@ -121,8 +121,8 @@ void phaseRound(Jeu* jeu) {
         printf("---------------------------------\n");
         phasePli(jeu);
 
-        printf("Equipe %d : Round = %d pts (Total = %d pts)\n", jeu->equipes[0].id, jeu->equipes[0].scoreRound, jeu->equipes[0].score);
-        printf("Equipe %d : Round = %d pts (Total = %d pts)\n", jeu->equipes[1].id, jeu->equipes[1].scoreRound, jeu->equipes[1].score);
+        printf("Equipe %d : Round = %d pts (Total = %d (+%d)pts)\n", jeu->equipes[0].id, jeu->equipes[0].scoreRound, jeu->equipes[0].score, jeu->equipes[0].scoreRound);
+        printf("Equipe %d : Round = %d pts (Total = %d (+%d)pts)\n", jeu->equipes[1].id, jeu->equipes[1].scoreRound, jeu->equipes[1].score, jeu->equipes[1].scoreRound);
 
         jeu->nbPli++;
     }
