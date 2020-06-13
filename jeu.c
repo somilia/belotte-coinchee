@@ -84,6 +84,7 @@ void lancerJeu(Jeu* jeu) {
     while (equipe[0].score < jeu->pointsObjectif &&
            equipe[1].score < jeu->pointsObjectif) {
         printf("\nDonne #%d:\n", i + 1);
+        jeu->donneur = (jeu->donneur + 1) % 4;
         phaseRound(jeu);
 
         i++;
@@ -95,7 +96,7 @@ void lancerJeu(Jeu* jeu) {
                equipe[0].membres[1].nom);
     } else {
         printf("L'équipe %d a gagné avec %d points ! Bravo à %s et %s !\n",
-               equipe[1].id, equipe[1].score, equipe[0].membres[41].nom,
+               equipe[1].id, equipe[1].score, equipe[1].membres[0].nom,
                equipe[1].membres[1].nom);
     }
 

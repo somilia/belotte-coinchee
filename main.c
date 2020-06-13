@@ -31,29 +31,10 @@ int main() {
     equipe[0].membres[0] = joueurs[0];
     equipe[0].membres[1] = joueurs[2];
 
-    equipe[0].membres[0] = joueurs[1];
-    equipe[0].membres[1] = joueurs[4];
+    equipe[1].membres[0] = joueurs[1];
+    equipe[1].membres[1] = joueurs[4];
 
     Jeu jeu = creerJeu(joueurs, equipe, paquet, 1000);
-
-    // Contrat c = creerContrat(100, CARREAU_ATOUT, &equipe[0], false);
-
-    // distribuer(joueurs, paquet);
-
-    // poserCarte(&joueurs[0], 0, &jeu);
-    // poserCarte(&joueurs[0], 4, &jeu);
-    // poserCarte(&joueurs[0], 7, &jeu);
-    // afficherPaquet(joueurs[0].carte, 8);
-
-    // int tri[8];
-    // trierCarteParPoints(c, joueurs[0].carte, tri, 8);
-
-    // printf("\n");
-    // for (int i = 0; i < 8; i++) {
-    //     printf("%d. ", tri[i]);
-    //     afficherCarte(*joueurs[0].carte[tri[i]]);
-    // }
-    // ajouterScore(&jeu);
 
     lancerJeu(&jeu);
 
