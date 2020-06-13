@@ -9,6 +9,7 @@
 #include "equipe.h"
 #include "jeu.h"
 #include "joueur.h"
+#include "sauvegarde.h"
 
 int main() {
     srand(time(NULL));
@@ -26,6 +27,12 @@ int main() {
     joueurs[1] = creerJoueur(1, "Lionel", &equipe[1], true);
     joueurs[2] = creerJoueur(2, "Younesse", &equipe[0], true);
     joueurs[3] = creerJoueur(3, "Yacine", &equipe[1], true);
+
+    equipe[0].membres[0] = joueurs[0];
+    equipe[0].membres[1] = joueurs[2];
+
+    equipe[0].membres[0] = joueurs[1];
+    equipe[0].membres[1] = joueurs[4];
 
     Jeu jeu = creerJeu(joueurs, equipe, paquet, 1000);
 
@@ -46,6 +53,7 @@ int main() {
     //     printf("%d. ", tri[i]);
     //     afficherCarte(*joueurs[0].carte[tri[i]]);
     // }
+    // ajouterScore(&jeu);
 
     lancerJeu(&jeu);
 

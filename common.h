@@ -81,6 +81,7 @@ struct Equipe {
     int id;
     int score;
     int scoreRound;
+    Joueur membres[2];
 };
 struct Contrat {
     int valeur;
