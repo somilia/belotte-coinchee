@@ -100,9 +100,10 @@ void phaseRound(Jeu* jeu) {
         if (nbRetry > 0) {
             printf("Tout le monde a passé... Redistribution des cartes\n");
         }
-        // Tant que personne n'a enchéri on redistribue les cartes
+        // Tant que personne n'a enchéri on mélange et redistribue les cartes
+        melanger(jeu->paquet, 200);
         distribuer(jeu->joueurs, jeu->paquet);
-        afficherJoueur(jeu->joueurs[0]);
+        // afficherJoueur(jeu->joueurs[0]);
         phaseEnchere(jeu);
 
         nbRetry++;
@@ -128,10 +129,10 @@ void phaseRound(Jeu* jeu) {
     }
 
     printf("\nLes 8 plis ont été joués. Résultats de la donne :\n");
-    calculerScoreDonne(jeu);
+    attribuerScoreDonne(jeu);
 }
 
-void calculerScoreDonne(Jeu *jeu) {
+void attribuerScoreDonne(Jeu *jeu) {
     Contrat contrat = jeu->enchere.contrat;
 
     // L'équipe qui a le contrat

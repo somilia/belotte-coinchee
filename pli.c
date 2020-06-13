@@ -93,9 +93,13 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
 
     if (atoutPose) {
         bool isMeilleurAtout =
-            pointsCarte(carte, contrat) > pointsCarte(*jeu->atoutPose, contrat);
+            pointsCarte(carte, contrat) > pointsCarte(*jeu->atoutPose, contrat) && isAtout;
         bool hasMeilleurAtout =
             hasMeilleurCarte(contrat, joueur, *jeu->atoutPose);
+
+        // printf("hasMeilleurAtout %d ", hasMeilleurAtout);
+        // printf("isMeilleurAtout %d ", isMeilleurAtout);
+        // printf("isMemeEquipe %d\n", isMemeEquipe(joueur, maitre));
 
         // 3. Lorsque l’on est conduit à jouer atout, soit parce qu’il s’agit de
         // la couleur demandée à l’entame, soit parce que l’on doit couper, on
@@ -114,6 +118,11 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
         // jouer atout si bon nous semble"
         if (isMemeEquipe(joueur, maitre) && !hasCouleurEntame) {
             printf("(6)\t");
+            return true;
+        }
+
+        if (!hasMeilleurAtout) {
+            printf("(9)\t");
             return true;
         }
 
@@ -137,14 +146,17 @@ bool carteValide(Jeu* jeu, Joueur* joueur, Carte carte) {
 
     printf("(FIN)\t");
     // return false;
-    return true;
+    return false;
 }
 
 bool hasMeilleurCarte(Contrat contrat, Joueur* joueur, Carte carte) {
+    bool carteIsAtout = contrat.atout == carte.couleur;
     for (int i = 0; i < 8; i++) {
         if (joueur->carte[i] != NULL) {
+            bool joueurCarteIsAtout = contrat.atout == (*joueur->carte[i]).couleur;
+
             if (pointsCarte(*joueur->carte[i], contrat) >
-                pointsCarte(carte, contrat)) {
+                pointsCarte(carte, contrat) && carteIsAtout == joueurCarteIsAtout) {
                 return true;
             }
         }
@@ -160,7 +172,7 @@ void phasePli(Jeu* jeu) {
     for (int i = 0; i < 4; i++) {
         jeu->joueurActuel = &jeu->joueurs[(jeu->entameur + i) % 4];
         printf("Au tour de %s de jouer.\n", jeu->joueurActuel->nom);
-        afficherJoueur(*jeu->joueurActuel);
+        // afficherJoueur(*jeu->joueurActuel);
         int choix;
 
         if (i > 0) afficherPile(jeu);
@@ -168,7 +180,8 @@ void phasePli(Jeu* jeu) {
         if (!jeu->joueurActuel->isBot) {
             choix = jouerCarteHumain(jeu, jeu->joueurActuel);
         } else {
-            choix = jouerCarteBot(jeu, jeu->joueurActuel);
+            choix = jouerCarteHumain(jeu, jeu->joueurActuel);
+            // choix = jouerCarteBot(jeu, jeu->joueurActuel);
         }
 
         Carte* carteJouee = jeu->joueurActuel->carte[choix];
@@ -179,11 +192,18 @@ void phasePli(Jeu* jeu) {
         printf("%s a joué : %s\n", jeu->joueurActuel->nom, carteStr);
 
         bool isAtout = carteJouee->couleur == jeu->enchere.contrat.atout;
-
+        
         // Si c'est le premier joueur
         if (i == 0) jeu->entame = carteJouee;
 
-        if (isAtout) jeu->atoutPose = carteJouee;
+        if (isAtout) {
+            bool isMeilleurAtout = true;
+            if (jeu->atoutPose != NULL)
+                isMeilleurAtout = pointsCarte(*carteJouee, jeu->enchere.contrat) > pointsCarte(*jeu->atoutPose, jeu->enchere.contrat);
+            
+            if (isMeilleurAtout)
+                jeu->atoutPose = carteJouee;
+        }
 
         poserCarte(jeu->joueurActuel, choix, jeu);
 

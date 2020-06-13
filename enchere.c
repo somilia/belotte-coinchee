@@ -308,12 +308,10 @@ bool choixEnchereValide(enum ChoixEnchere choix, struct EtatEnchere etat, Joueur
 //3 cartes fortes ->80 pts;     4 cartes fortes -> 120 pts
 enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etat) {
     // Ce sont les cartes qui donnent des points
-    bool cartesForte[] = {0, 0, 1, 1, 1, 1, 1};
+    bool cartesForte[] = {0, 0, 1, 1, 1, 0, 1, 1};
 
     // Nombre de cartes dans la même couleur considérée comme forte
     int nbCartesFortes[] = {0, 0, 0, 0};
-
-    int valeursCarteFortes[] = {0, 0, 0, 0};
 
     for (int i = 0; i < 8; i++) {
         bool isForte = cartesForte[joueur->carte[i]->valeur];
@@ -338,9 +336,9 @@ enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etat) {
         // Si quelqu'un avait déjà enchéri on rajoute 10 ou 30 à la valeur du contrat
         // Mais si le contrat dépasse 140  on passe
         if (etat->encheri) {
-            if (etat->contrat.valeur <= 140) {
+            if (etat->contrat.valeur <= 140 && etat->contrat.equipe != joueur->equipe) {
                 if (maxNb == 3)
-                    valeurContrat = etat->contrat.valeur + 10;
+                    valeurContrat = etat->contrat.valeur + 20;
                 else if (maxNb >= 4)
                     valeurContrat = etat->contrat.valeur + 30;
             } else {
@@ -359,7 +357,6 @@ enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etat) {
 
         return ENCHERIR;
     }
-
 
     return PASSER;
 }

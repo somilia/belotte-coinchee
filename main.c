@@ -15,7 +15,6 @@ int main() {
 
     Carte paquet[TAILLE_PAQUET];
     initPaquetCarte(paquet);
-    melanger(paquet, 150);
 
     Joueur joueurs[4];
     Equipe equipe[2];

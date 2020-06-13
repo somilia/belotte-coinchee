@@ -32,6 +32,6 @@ void phaseRound(Jeu* jeu);
 
 bool isAtout(Jeu* jeu, Carte c);
 
-void calculerScoreDonne(Jeu *jeu);
+void attribuerScoreDonne(Jeu *jeu);
 
 #endif

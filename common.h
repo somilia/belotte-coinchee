@@ -119,7 +119,7 @@ struct Jeu {
     // Carte de l'entame
     Carte* entame;
 
-    // Carte de l'atout au cours du pli (celle qui a coupé)
+    // Carte du meilleur atout au cours du pli (celle qui a coupé)
     Carte* atoutPose;
 
     // Position de la carte la plus forte posée pour le moment
