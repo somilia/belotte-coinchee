@@ -325,6 +325,7 @@ enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etat) {
     Couleur meilleureCouleur = -1;
     int maxNb = 0;
 
+    // Retourne la couleur qui a le plus de carte forte
     for (Couleur i = TREFLE; i <= PIQUE; i++) {
         if (nbCartesFortes[i] > maxNb) {
             maxNb = nbCartesFortes[i];
@@ -338,15 +339,16 @@ enum ChoixEnchere enchereBot(Joueur* joueur, struct EtatEnchere* etat) {
         // Si quelqu'un avait déjà enchéri on rajoute 10 ou 30 à la valeur du contrat
         // Mais si le contrat dépasse 140  on passe
         if (etat->encheri) {
-            if (etat->contrat.valeur <= 140 && etat->contrat.equipe != joueur->equipe) {
+            if (etat->contrat.valeur <= 130 && etat->contrat.equipe != joueur->equipe) {
                 if (maxNb == 3)
-                    valeurContrat = etat->contrat.valeur + 20;
+                    valeurContrat = etat->contrat.valeur + 10;
                 else if (maxNb >= 4)
-                    valeurContrat = etat->contrat.valeur + 30;
+                    valeurContrat = etat->contrat.valeur + 20;
             } else {
                 return PASSER;
             }
         } else {
+            // Si personne n'a enchéri avant
             if (maxNb == 3)
                 valeurContrat = 80;
             else if (maxNb >= 4)

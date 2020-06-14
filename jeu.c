@@ -104,16 +104,25 @@ void lancerJeu(Jeu* jeu) {
 }
 
 void phaseRound(Jeu* jeu) {
-    jeu->nbPli = 0;
 
+    // Initialisation de la donne
+    jeu->nbPli = 0;
     int nbRetry = 0;
 
-    jeu->equipes[0].scoreRound = 0;
-    jeu->equipes[1].scoreRound = 0;
+    for (int i = 0; i < 2; i++) {
+        jeu->equipes[i].victoires = 0;
+        jeu->equipes[i].scoreRound = 0;
+    }
 
     do {
         if (nbRetry > 0) {
             printf("Tout le monde a passé... Redistribution des cartes\n");
+        }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                jeu->joueurs[i].possedeCouleur[j] = 0;
+            }
         }
         // Tant que personne n'a enchéri on mélange et redistribue les cartes
         melanger(jeu->paquet, 200);
@@ -157,6 +166,7 @@ void attribuerScoreDonne(Jeu* jeu) {
     // L'équipe qui n'a pas le contrat (l'autre)
     Equipe* defenseurs = &jeu->equipes[(preneurs->id + 1) % 2];
 
+    // Annonces de l'équipe 0 et 1
     int valAnnonces[2] = {0, 0};
     int valBelotes[2] = {0, 0};
 
@@ -198,10 +208,12 @@ void attribuerScoreDonne(Jeu* jeu) {
         gainsDefenseurs += 10;
     }
 
+    bool preneursCapot = preneurs->victoires == 8;
+
     int gainCoinche = contrat.valeur + 160 + annoncesPreneurs + annoncesDef;
 
-    if (contrat.equipe->scoreRound > contrat.valeur &&
-        contrat.equipe->scoreRound > defenseurs->scoreRound) {
+    if (preneurs->scoreRound > contrat.valeur &&
+        preneurs->scoreRound > defenseurs->scoreRound || (preneursCapot && contrat.capot)) {
         printf("L'équipe %d respecte le contrat (%d > %d)\n", preneurs->id,
                preneurs->scoreRound, contrat.valeur);
         if (jeu->enchere.surcoinche) {
@@ -272,10 +284,12 @@ int comparateurPointsCarte(const void* carte1, const void* carte2) {
 
 int trierCarteParPoints(Contrat contrat, Carte* cartes[], int triOutput[],
                         int nbCartes) {
+
     struct _CompareEntry* entries =
         (struct _CompareEntry*)malloc(sizeof(struct _CompareEntry) * nbCartes);
 
     int nbCartesReel = 0;
+    // Remplissage tableau de structure de comparaison
     for (int i = 0; i < nbCartes; i++) {
         if (cartes[i] != NULL) {
             struct _CompareEntry entry = {

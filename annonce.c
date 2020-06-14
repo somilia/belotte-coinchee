@@ -51,7 +51,7 @@ Annonce annonce_carre(Joueur* joueur) {
         Valeur valeur = joueur->carte[i]->valeur;
         vals[valeur]++;
 
-        if (vals[valeur] == 4) {  // On saute les valeurs 7 et 8
+        if (vals[valeur] == 4) {
             annonce.nom = CARRE;
             annonce.valeur = valeur;
         }

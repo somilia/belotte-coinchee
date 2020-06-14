@@ -81,6 +81,7 @@ struct Equipe {
     int id;
     int score;
     int scoreRound;
+    int victoires; // Victoires consécutifs dans une donne (pour le capot)
     Joueur membres[2];
 };
 struct Contrat {

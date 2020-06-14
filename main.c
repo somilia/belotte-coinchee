@@ -34,7 +34,7 @@ int main() {
     equipe[1].membres[0] = joueurs[1];
     equipe[1].membres[1] = joueurs[4];
 
-    Jeu jeu = creerJeu(joueurs, equipe, paquet, 1000);
+    Jeu jeu = creerJeu(joueurs, equipe, paquet, 1500);
 
     lancerJeu(&jeu);
 
