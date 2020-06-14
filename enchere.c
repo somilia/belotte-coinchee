@@ -214,7 +214,7 @@ void phaseEnchere(Jeu* jeu) {
     while (enCours) {
         enum ChoixEnchere choix;
 
-        jeu->joueurActuel = &jeu->joueurs[(jeu->donneur + tourEnchere - 1) % 4];
+        jeu->joueurActuel = &jeu->joueurs[(jeu->donneur + tourEnchere) % 4];
 
         printf("Au tour de %s d'annoncer.\n", jeu->joueurActuel->nom);
 

@@ -9,7 +9,7 @@
 
 void nouveauPli(Jeu* jeu) {
     if (jeu->nbPli == 0)
-        jeu->entameur = (jeu->donneur - 1) % 4;
+        jeu->entameur = (jeu->donneur + 1) % 4;
     else
         jeu->entameur = poseurCarte(jeu, carteGagnante(jeu))->id;
 
@@ -133,16 +133,13 @@ int premiereMeilleureCarteOrdre(Jeu* jeu, Joueur* joueur, Carte carte,
 
             if (pointsCarte(*carteTmp, contrat) > pointsCarte(carte, contrat) &&
                 carteIsAtout == joueurCarteIsAtout) {
-                printf("OK!!!!: %d ", ordre[i]);
                 return ordre[i];
             } else if (pointsCarte(*carteTmp, contrat) > pointsCarte(carte, contrat) &&
-                carteIsEntame == joueurCarteIsEntame){
-                printf("OK2!!!!: %d ", ordre[i]);
+                carteIsEntame == joueurCarteIsEntame && jeu->atoutPose == NULL){
                 return ordre[i];
             }
         }
     }
-    printf("nn\n");
     return NONE;
 }
 
@@ -159,7 +156,7 @@ void phasePli(Jeu* jeu) {
         afficherPile(jeu);
 
         if (!jeu->joueurActuel->isBot) {
-            afficherJoueur(*jeu->joueurActuel);
+            // afficherJoueur(*jeu->joueurActuel);
             choix = jouerCarteHumain(jeu, jeu->joueurActuel);
         } else {
             choix = jouerCarteBot(jeu, jeu->joueurActuel);
@@ -297,7 +294,6 @@ int jouerCarteBot(Jeu* jeu, Joueur* joueur) {
     if (jeu->entame == NULL) {
         for (int i = 0; i < n; i++) {
             if (carteValide(jeu, joueur, *joueur->carte[tri[i]])) {
-                printf("okok 0\n");
                 return tri[i];
             }
         }
@@ -313,9 +309,7 @@ int jouerCarteBot(Jeu* jeu, Joueur* joueur) {
         // Si l’IA n’est pas en mesure de remporter le pli, elle joue sa carte
         // la plus faible
         for (int i = 0; i < n; i++) {
-            printf("okok 1\n");
             if (carteValide(jeu, joueur, *joueur->carte[tri[i]])) {
-                printf("okok 1\n");
                 choix = tri[i];
                 break;
             }
@@ -323,7 +317,6 @@ int jouerCarteBot(Jeu* jeu, Joueur* joueur) {
     } else {
         // Si l’IA est en mesure de remporter le pli avec une de ses cartes,
         // elle le fait en posant la carte la plus faible possible
-        printf("okok 2\n");
         choix = indiceCarte;
     }
 

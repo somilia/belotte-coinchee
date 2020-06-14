@@ -7,11 +7,14 @@
 
 #define SCORE_FILENAME "scores.txt"
 
-int ajouterScore(Jeu* jeu);
+int ajouterScore(char* nom );
+void afficherScores();
 
 void initialiserFichier();
 
 int modifierLigne(char* id);
 
+struct Score trouverNom(char* nom, FILE* fp);
+struct Score parseLine(char line[150]);
 
 #endif

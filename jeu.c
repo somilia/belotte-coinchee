@@ -8,6 +8,7 @@
 #include "common.h"
 #include "enchere.h"
 #include "pli.h"
+#include "sauvegarde.h"
 
 Jeu creerJeu(Joueur joueurs[4], Equipe equipes[2], Carte paquet[TAILLE_PAQUET],
              int pointsObjectif) {
@@ -94,13 +95,14 @@ void lancerJeu(Jeu* jeu) {
         printf("L'équipe %d a gagné avec %d points ! Bravo à %s et %s !\n",
                equipe[0].id, equipe[0].score, equipe[0].membres[0].nom,
                equipe[0].membres[1].nom);
+        ajouterScore(jeu->joueurPrincipal->nom);
     } else {
         printf("L'équipe %d a gagné avec %d points ! Bravo à %s et %s !\n",
                equipe[1].id, equipe[1].score, equipe[1].membres[0].nom,
                equipe[1].membres[1].nom);
+        ajouterScore(jeu->joueurPrincipal->nom);
     }
-
-    // SAUVEGARDER SCORE ICI
+    
 }
 
 void phaseRound(Jeu* jeu) {
@@ -127,6 +129,7 @@ void phaseRound(Jeu* jeu) {
         // Tant que personne n'a enchéri on mélange et redistribue les cartes
         melanger(jeu->paquet, 200);
         distribuer(jeu->joueurs, jeu->paquet);
+
         phaseEnchere(jeu);
 
         nbRetry++;
